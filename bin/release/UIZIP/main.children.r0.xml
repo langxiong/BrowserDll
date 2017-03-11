@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="780,380">
+    <Font name="" size="10" bold="false" italic="false" />
+    <VerticalLayout inset="5,10,5,10">
+        <HorizontalLayout>
+            <VerticalLayout width="170">
+                <Option name="r0.0#opt" text="1" float="true" pos="10,2,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter"  normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.r0" selected="true" selectedtextcolor="#00FF8000" />
+                <Option name="r0.1#opt" text="2" float="true" pos="10,76,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter"  normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.r0" selectedtextcolor="#00FF8000" />
+                <Option name="r0.2#opt" text="3" float="true" pos="10,150,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter"  normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.r0" selectedtextcolor="#00FF8000" />
+                <Option name="r0.3#opt" text="4" float="true" pos="10,224,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter"  normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.r0" selectedtextcolor="#00FF8000" />
+                <Option name="r0.4#opt" text="5" float="true" pos="10,298,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter"  normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.r0" selectedtextcolor="#00FF8000" />
+            </VerticalLayout>
+            <TabLayout name="r0#tab" inset="1,1,1,1">
+                <Label name="r0.text.debug#lbl" text="调试信息输出，需要进一步完善" float="true" pos="10,9,0,0" width="189" height="32" textpadding="6,0,7,0" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" align="left" />
+            </TabLayout>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

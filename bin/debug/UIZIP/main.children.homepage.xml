@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="780,380">
+    <Font name="" size="10" bold="false" italic="false" />
+    <VerticalLayout>
+        <HorizontalLayout height="33">
+            <HorizontalLayout height="33">
+                <Container width="90" height="33" maxheight="33" maxwidth="90" minwidth="90" minheight="33">
+                    <Label name="homepage.usage.name#lbl" text="Usage:" float="true" pos="0,0,0,0" width="90" height="33" maxheight="33" maxwidth="60" minwidth="90" minheight="33" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" />
+                </Container>
+                <Container height="33" inset="5,10,5,10">
+                    <Progress name="homepage.usage#prg" width="60" height="30" bkcolor="#FFE9E9FF" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" align="centertop" foreimage="block.red.png" min="0" max="100" value="65" />
+                </Container>
+            </HorizontalLayout>
+            <Container width="100" height="33" maxheight="33" maxwidth="100" minwidth="100" minheight="33">
+                <Label name="homepage.usage.txt#lbl" text="65%" float="true" pos="0,0,0,0" width="100" height="33" maxheight="33" maxwidth="100" minwidth="100" minheight="33" textpadding="30,0,0,0" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="leftvcenter" />
+            </Container>
+        </HorizontalLayout>
+        <HorizontalLayout width="780" height="180">
+            <HorizontalLayout width="232" height="180">
+                <Label text="Usage:" float="true" pos="0,24,0,0" width="90" height="33" maxheight="33" maxwidth="90" minwidth="90" minheight="33" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" />
+                <Text text="仪表盘" float="true" pos="94,10,0,0" width="128" height="128" bkimage="file=&apos;Bule_Button_pass.png&apos; corner=&apos;5,5,5,5&apos;" textpadding="8,6,6,6" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" showhtml="true" align="centervcenter" />
+            </HorizontalLayout>
+            <HorizontalLayout>
+                <Text text="仪表盘数字&lt;n&gt;显示" float="true" pos="15,32,0,0" width="115" height="54" textpadding="2,0,2,0" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" showhtml="true" align="centerwrap" />
+                <Label name="homepage.dashboard.hundred#lbl" bordersize="6" borderround="6,6" float="true" pos="156,38,0,0" width="64" height="64" bordercolor="#0092D050" textpadding="4,4,4,4" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="3" align="leftvcenter" />
+                <Label name="homepage.dashboard.ten#lbl" bordersize="6" borderround="6,6" float="true" pos="251,38,0,0" width="64" height="64" bordercolor="#001F477D" textpadding="4,4,4,4" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="3" align="leftvcenter" />
+                <Label name="homepage.dashboard.single#lbl" bordersize="6" borderround="6,6" float="true" pos="347,38,0,0" width="64" height="64" bordercolor="#00FF0000" textpadding="4,4,4,4" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="3" align="leftvcenter" />
+            </HorizontalLayout>
+        </HorizontalLayout>
+        <HorizontalLayout>
+            <HorizontalLayout>
+                <VerticalLayout width="140" maxwidth="140" minwidth="140">
+                    <Button name="homepage.temp.plus#btn" text="温度+" float="true" pos="10,20,0,0" width="120" height="56" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" />
+                    <Button name="homepage.temp.minus#btn" text="温度-" float="true" pos="10,94,0,0" width="120" height="56" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" />
+                </VerticalLayout>
+                <VerticalLayout width="140" maxwidth="140" minwidth="140">
+                    <Button name="homepage.heating#btn" text="加热" float="true" pos="10,22,0,0" width="120" height="56" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" />
+                    <Button name="homepage.madeWarming#btn" text="制热" float="true" pos="10,94,0,0" width="120" height="56" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" />
+                </VerticalLayout>
+                <Container width="140">
+                    <Text name="homepage.diplay.temp#lbl" text="??温度&lt;n&gt;16度" float="true" pos="12,21,0,0" width="105" height="124" bordercolor="#002D2D2D" textpadding="2,13,2,0" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" showhtml="true" align="centerwrap" />
+                </Container>
+            </HorizontalLayout>
+            <Container width="120" maxwidth="120" minwidth="120">
+                <Option name="homepage.switch#opt" float="true" pos="12,35,0,0" width="96" height="96" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.big.off.png" selectedimage="toggleSwitch.big.on.png" selectedtextcolor="#00333333" />
+            </Container>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

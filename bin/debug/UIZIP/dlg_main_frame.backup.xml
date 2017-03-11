@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="800,1280" sizebox="5,5,5,5" caption="0,0,0,65" showshadow="true" shadowimage="shadow_active.png" shadowcorner="35,35,35,35">
+    <Font name="微软雅黑" size="18" bold="false" italic="false" default="true" />
+    <Font name="微软雅黑" size="18" bold="true" italic="false" />
+    <Font name="微软雅黑" size="20" bold="false" italic="false" />
+    <Font name="微软雅黑" size="20" bold="true" italic="false" />
+    <Font name="微软雅黑" size="22" bold="false" italic="false" />
+    <Font name="" size="10" bold="false" italic="false" />
+    <Default name="VScrollBar" value="range=&quot;100&quot; width=&quot;15&quot; maxwidth=&quot;15&quot; button1normalimage=&quot;&quot; button1hotimage=&quot;&quot; button1pushedimage=&quot;&quot; button1disabledimage=&quot;&quot; button2normalimage=&quot;&quot; button2hotimage=&quot;&quot; button2pushedimage=&quot;&quot; button2disabledimage=&quot;&quot; thumbnormalimage=&quot;file=&apos;scroball_mm.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbhotimage=&quot;file=&apos;scroball_c.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbpushedimage=&quot;file=&apos;scroball_c.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbdisabledimage=&quot;file=&apos;scroball_mm.png&apos; corner=&apos;4,4,4,4&apos;&quot; bknormalimage=&quot;scrobar_bk_n.png&quot; bkhotimage=&quot;scrobar_bk_n.png&quot; bkpushedimage=&quot;scrobar_bk_n.png&quot; bkdisabledimage=&quot;scrobar_bk_n.png&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot;" />
+    <Default name="HScrollBar" value="range=&quot;100&quot; height=&quot;7&quot; maxheight=&quot;7&quot; button1normalimage=&quot;&quot; button1hotimage=&quot;&quot; button1pushedimage=&quot;&quot; button1disabledimage=&quot;&quot; button2normalimage=&quot;&quot; button2hotimage=&quot;&quot; button2pushedimage=&quot;&quot; button2disabledimage=&quot;&quot; thumbnormalimage=&quot;file=&apos;scroball_mm_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbhotimage=&quot;file=&apos;scroball_c_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbpushedimage=&quot;file=&apos;scroball_c_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbdisabledimage=&quot;file=&apos;scroball_mm_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; bknormalimage=&quot;scrobar_bk_n_hor.png&quot; bkhotimage=&quot;scrobar_bk_n_hor.png&quot; bkpushedimage=&quot;scrobar_bk_n_hor.png&quot; bkdisabledimage=&quot;scrobar_bk_n_hor.png&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot;" />
+    <VerticalLayout bkimage="main.background.png" inset="10,10,10,10" childpadding="6">
+        <VerticalLayout name="header" height="360" bordercolor="#001E1E1E" maxheight="360" minheight="360">
+            <HorizontalLayout height="100">
+                <HorizontalLayout height="50">
+                    <Container width="106" height="50" maxheight="50" maxwidth="106" minwidth="106" minheight="50">
+                        <Label name="header.logo#lbl" text="LOGO" float="true" pos="9,8,0,0" width="88" height="35" bordercolor="#002D2D2D" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" />
+                    </Container>
+                    <Container width="230" height="50">
+                        <Label name="header.name#lbl" text="系统名称" float="true" pos="5,5,0,0" width="161" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" />
+                    </Container>
+                </HorizontalLayout>
+                <Container width="120" height="100" maxheight="100" maxwidth="120" minwidth="120" minheight="100">
+                    <Option name="header.switch#opt" float="true" pos="6,1,0,0" width="96" height="96" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.big.off.png" selectedimage="toggleSwitch.big.on.png" selectedtextcolor="#00FF8000" />
+                </Container>
+            </HorizontalLayout>
+            <HorizontalLayout>
+                <Container inset="5,5,5,5">
+                    <Label name="header.image#lbl" text="图片" width="60" height="30" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                </Container>
+                <Container width="160" height="206">
+                    <Text name="header.deviceInfo#txt" text="设备相关信&lt;n&gt;息，自行填写，可添加&lt;n&gt;照片" float="true" pos="5,5,0,0" width="142" height="192" bordercolor="#002D2D2D" textpadding="5,13,5,0" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" showhtml="true" align="leftwrap" />
+                </Container>
+            </HorizontalLayout>
+            <HorizontalLayout height="54" inset="3,6,3,6">
+                <Container>
+                    <Option name="header.homepage#opt" text="首页" float="true" pos="18,0,0,0" width="116" height="42" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.headers" selected="true" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                </Container>
+                <Container>
+                    <Option name="header.status#opt" text="状态" float="true" pos="18,0,0,0" width="116" height="42" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.headers" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                </Container>
+                <Container>
+                    <Option name="header.controlSystem#opt" text="控制系统" float="true" pos="18,0,0,0" width="116" height="42" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.headers" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                </Container>
+                <Container>
+                    <Option name="header.quotationSystem#opt" text="？？系统" float="true" pos="18,0,0,0" width="116" height="42" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.headers" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                </Container>
+                <Container>
+                    <Option name="header.check#opt" text="故障检测" float="true" pos="18,0,0,0" width="116" height="42" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.headers" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                </Container>
+            </HorizontalLayout>
+        </VerticalLayout>
+        <TabLayout name="main#tab" bordersize="3" height="380" bordercolor="#009CC067" maxheight="380" minheight="380" inset="1,1,1,1">
+            <ChildLayout xmlfile="main.children.homepage.xml" />
+            <ChildLayout visible="false" xmlfile="main.children.status.xml" />
+            <ChildLayout visible="false" xmlfile="main.children.controlSystem.xml" />
+            <ChildLayout visible="false" xmlfile="main.children.r0.xml" />
+            <ChildLayout visible="false" xmlfile="main.children.maintenance.xml" />
+        </TabLayout>
+        <VerticalLayout name="footer" bordersize="3" bordercolor="#0045875B">
+            <HorizontalLayout>
+                <VerticalLayout width="85">
+                    <Option name="footer.screen.0#opt" text="1" float="true" pos="5,5,0,0" width="72" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.screen" selectedtextcolor="#00FF8000" />
+                    <Option name="footer.screen.1#opt" text="2" float="true" pos="5,55,0,0" width="72" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.screen" selectedtextcolor="#00FF8000" />
+                    <Option name="footer.screen.2#opt" text="3" float="true" pos="5,105,0,0" width="72" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.screen" selectedtextcolor="#00FF8000" />
+                    <Option name="footer.screen.3#opt" text="4" float="true" pos="5,155,0,0" width="72" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.screen" selectedtextcolor="#00FF8000" />
+                    <Option name="footer.screen.split#opt" text="分屏" float="true" pos="5,205,0,0" width="72" height="40" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" pushedimage="common.btn.press.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.screen" selected="true" selectedtextcolor="#00FF8000" />
+                </VerticalLayout>
+                <Container bordercolor="#002D2D2D" inset="5,5,5,5">
+                    <CameraLayout name="cameraContainer#tileLayout" childpadding="3" itemsize="341,247" columns="2">
+                        <CameraVideo name="footer.screen.0#childwnd" />
+                        <CameraVideo name="footer.screen.1#childwnd" />
+                        <CameraVideo name="footer.screen.2#childwnd" />
+                        <CameraVideo name="footer.screen.3#childwnd" />
+                    </CameraLayout>
+                </Container>
+            </HorizontalLayout>
+        </VerticalLayout>
+    </VerticalLayout>
+</Window>

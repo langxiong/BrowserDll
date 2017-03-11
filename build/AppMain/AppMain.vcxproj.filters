@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>{e03bae55-738b-41cd-aaec-6cb27756cb35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Header Files">
+      <UniqueIdentifier>{57b994ab-f9a2-4f1a-8eef-b0f52fea2985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common\Source Files">
+      <UniqueIdentifier>{c9b1cdb9-5d86-47a3-a64c-1c57abf49ff7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{0740b508-2d70-4ed8-968d-f48e8e7c384e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlls">
+      <UniqueIdentifier>{317e0c78-7339-4854-93d6-23855eaadd10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{60629324-be4d-49fd-8b09-5113c431e66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlls\Debug">
+      <UniqueIdentifier>{030e8e45-dd69-4ced-9c81-49c773b8b5c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlls\Release">
+      <UniqueIdentifier>{c74a610e-8766-48f5-81a7-419697169ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communications">
+      <UniqueIdentifier>{57f829cb-4aac-47ca-bd44-bdf1aab26245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communications\Header Files">
+      <UniqueIdentifier>{cb95a55a-ff72-445e-b9b0-c973d72e1765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communications\Souce Files">
+      <UniqueIdentifier>{ee0931aa-1130-4ee1-be18-3d46802ad07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threads">
+      <UniqueIdentifier>{765b1821-a953-4990-b99f-3f86e6cb5357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threads\Header Files">
+      <UniqueIdentifier>{5125a5b3-d6cc-49a0-87fa-278bc604923e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threads\Souce Files">
+      <UniqueIdentifier>{0f7de773-8830-495b-b670-694a80c2a182}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\AppCommon.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\StringHelper.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\MyApp.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\MyPipe.h">
+      <Filter>Communications\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\FindUtil.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\stdafx.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\targetver.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\AppMain\resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\DateTimeUtil.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\include\StringHelper.cpp">
+      <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppMain\Main.cpp">
+      <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppMain\MyApp.cpp">
+      <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppMain\MyPipe.cpp">
+      <Filter>Communications\Souce Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\AppMain\stdafx.cpp">
+      <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\include\DateTimeUtil.cpp">
+      <Filter>Common\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\debug\AppMain.properties">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\AppMain\AppMain.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

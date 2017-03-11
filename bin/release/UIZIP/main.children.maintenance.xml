@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="780,380">
+    <Font name="" size="10" bold="false" italic="false" />
+    <VerticalLayout inset="5,10,5,10">
+        <HorizontalLayout>
+            <VerticalLayout width="170" height="360">
+                <Option name="maintenance.current#opt" text="当前" float="true" pos="10,0,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.maintenance" selected="true" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="maintenance.week#opt" text="一周" float="true" pos="10,74,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.maintenance" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="maintenance.mounth#opt" text="一个月" float="true" pos="10,148,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.maintenance" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="maintenance.general#opt" text="常规" float="true" pos="10,222,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.maintenance" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="maintenance.query#opt" text="查询" float="true" pos="10,296,0,0" width="150" height="54" bordercolor="#002D2D2D" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.maintenance" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+            </VerticalLayout>
+            <TabLayout name="maintenance#tab" bordercolor="#002D2D2D" inset="1,1,1,1">
+                <Label name="maintenance.text.debug#lbl" text="各选项的子信息" float="true" pos="10,9,0,0" width="337" height="44" textpadding="6,0,7,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="2" align="leftvcenter" />
+            </TabLayout>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

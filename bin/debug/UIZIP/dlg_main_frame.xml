@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="1366,768" caption="0,0,0,66" defaultfontcolor="#FF333333" showshadow="true" shadowimage="shadow_active.png" shadowcorner="35,35,35,35">
+    <Font name="微软雅黑" size="12" bold="false" italic="false" default="true" />
+    <Font name="微软雅黑" size="18" bold="false" italic="false" />
+    <Font name="微软雅黑" size="14" bold="false" italic="false" />
+    <Font name="宋体" size="25" bold="true" italic="false" />
+    <Default name="VScrollBar" value="range=&quot;100&quot; width=&quot;12&quot; maxwidth=&quot;12&quot; button1normalimage=&quot;&quot; button1hotimage=&quot;&quot; button1pushedimage=&quot;&quot; button1disabledimage=&quot;&quot; button2normalimage=&quot;&quot; button2hotimage=&quot;&quot; button2pushedimage=&quot;&quot; button2disabledimage=&quot;&quot; thumbnormalimage=&quot;file=&apos;scroball_mm.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbhotimage=&quot;file=&apos;scroball_c.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbpushedimage=&quot;file=&apos;scroball_c.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbdisabledimage=&quot;file=&apos;scroball_mm.png&apos; corner=&apos;4,4,4,4&apos;&quot; bknormalimage=&quot;scrobar_bk_n.png&quot; bkhotimage=&quot;scrobar_bk_n.png&quot; bkpushedimage=&quot;scrobar_bk_n.png&quot; bkdisabledimage=&quot;scrobar_bk_n.png&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot;" />
+    <Default name="HScrollBar" value="range=&quot;100&quot; height=&quot;7&quot; maxheight=&quot;7&quot; button1normalimage=&quot;&quot; button1hotimage=&quot;&quot; button1pushedimage=&quot;&quot; button1disabledimage=&quot;&quot; button2normalimage=&quot;&quot; button2hotimage=&quot;&quot; button2pushedimage=&quot;&quot; button2disabledimage=&quot;&quot; thumbnormalimage=&quot;file=&apos;scroball_mm_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbhotimage=&quot;file=&apos;scroball_c_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbpushedimage=&quot;file=&apos;scroball_c_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; thumbdisabledimage=&quot;file=&apos;scroball_mm_hor.png&apos; corner=&apos;4,4,4,4&apos;&quot; bknormalimage=&quot;scrobar_bk_n_hor.png&quot; bkhotimage=&quot;scrobar_bk_n_hor.png&quot; bkpushedimage=&quot;scrobar_bk_n_hor.png&quot; bkdisabledimage=&quot;scrobar_bk_n_hor.png&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot;" />
+    <VerticalLayout bkcolor="#FF0D0E1A" inset="20,16,20,0">
+        <HorizontalLayout childpadding="20">
+            <VerticalLayout bordersize="1" borderround="4,4" width="323" bkcolor="#FF141529" bordercolor="#00262731" inset="1,1,1,1">
+                <HorizontalLayout bordersize="1" width="321" height="52" inset="0,0,0,16">
+                    <Label text="面部动作单元" float="true" pos="60,11,0,0" width="177" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="lefttop" />
+                    <Label float="true" pos="0,47,0,0" width="183" height="2" bkimage="line_1.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                    <Label float="true" pos="9,7,0,0" width="39" height="38" bkimage="icon_curve.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                </HorizontalLayout>
+                <VerticalLayout name="curve.container#ver" vscrollbar="true">
+                    <HorizontalLayout name="curve.brow.lift.inner#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="抬眉(内角)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.brow.lift.outer#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="抬眉(外角)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.frown#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="皱眉" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.stare#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="瞪眼" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.blink.outer#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="眯眼(外圈)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.blink.inter#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="眯眼(内圈)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.nose#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="皱鼻" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.lip.up#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴唇向上" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.up#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴角上扬" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.tightenup#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴角收紧" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.down#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴角下沉" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.lip.up#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="下唇上扬" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.widen#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴角拉伸" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.lip.tightenup#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="嘴唇收紧" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.open.small#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="张嘴(小)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.mouse.open.middle#hor" height="40" bkcolor="#FF141529">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="张嘴(中)" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                    <HorizontalLayout name="curve.eye.blink#hor" height="40" bkcolor="#FF0E0E1A">
+                        <Container width="80" maxwidth="80" minwidth="80">
+                            <Label text="眨眼" float="true" pos="0,5,0,0" width="80" height="27" textpadding="5,0,5,0" textcolor="#009899AD" disabledtextcolor="#FFA7A6AA" font="2" align="rightvcenter" />
+                        </Container>
+                        <Container />
+                    </HorizontalLayout>
+                </VerticalLayout>
+            </VerticalLayout>
+            <VerticalLayout bkcolor="#FF141529">
+                <HorizontalLayout height="52">
+                    <Label text="视频流展示" float="true" pos="58,11,0,0" width="177" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="lefttop" />
+                    <Label float="true" pos="0,47,0,0" width="183" height="2" bkimage="line_2.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                    <Label float="true" pos="12,9,0,0" width="35" height="35" bkimage="icon_video.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                </HorizontalLayout>
+                <VerticalLayout inset="10,0,10,0" childpadding="14">
+                    <Container>
+                        <CameraVideo />
+                    </Container>
+                    <HorizontalLayout height="150">
+                        <Container width="55">
+                            <Label float="true" pos="11,52,0,0" width="33" height="47" bkimage="microphone.png" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="3" align="left" />
+                        </Container>
+                        <VerticalLayout bkcolor="#FF0D0E1A">
+                            <HorizontalLayout height="38">
+                                <Container width="46" height="38">
+                                    <Label name="voice.l.quote#lbl" text="&quot;" float="true" pos="13,7,0,0" width="26" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="3" align="leftvcenter" />
+                                </Container>
+                                <Container height="38" />
+                            </HorizontalLayout>
+                            <Container>
+                                <Text name="voice#txt" textpadding="40,7,40,6" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="leftwrap" endellipsis="true" />
+                            </Container>
+                            <HorizontalLayout height="38">
+                                <Container height="38" />
+                                <Container width="32">
+                                    <Label name="voice.r.quote#lbl" text="&quot;" float="true" pos="1,2,0,0" width="16" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="3" align="leftvcenter" />
+                                </Container>
+                            </HorizontalLayout>
+                        </VerticalLayout>
+                    </HorizontalLayout>
+                </VerticalLayout>
+            </VerticalLayout>
+            <VerticalLayout width="303" childpadding="9">
+                <VerticalLayout height="370" bkcolor="#FF141528">
+                    <HorizontalLayout width="303" height="52" inset="0,0,0,16">
+                        <Label text="情绪分析" float="true" pos="57,11,0,0" width="177" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="lefttop" />
+                        <Label float="true" pos="0,47,0,0" width="183" height="2" bkimage="line_3.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                        <Label float="true" pos="12,9,0,0" width="34" height="34" bkimage="icon_radar.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </HorizontalLayout>
+                    <Container name="test#ver" width="303" height="318" />
+                </VerticalLayout>
+                <VerticalLayout bordersize="1" borderround="4,4" bkcolor="#FF141529" bordercolor="#00A0A0A4" inset="1,1,1,1">
+                    <HorizontalLayout height="52" inset="0,0,0,16">
+                        <Label text="微表情分析结果" float="true" pos="59,11,0,0" width="177" height="30" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="1" align="lefttop" />
+                        <Label float="true" pos="12,11,0,0" width="36" height="30" bkimage="icon_emotion.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                        <Label float="true" pos="0,47,0,0" width="216" height="2" bkimage="line_4.png" textcolor="#FF333333" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </HorizontalLayout>
+                    <VerticalLayout name="emotion.analysis#ver" childpadding="1" vscrollbar="true" />
+                </VerticalLayout>
+            </VerticalLayout>
+        </HorizontalLayout>
+        <HorizontalLayout height="18">
+            <Container />
+            <Container width="301">
+                <Label text="语音技术由科大讯飞提供" textcolor="#0062647B" disabledtextcolor="#FFA7A6AA" font="0" align="rightvcenter" />
+            </Container>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

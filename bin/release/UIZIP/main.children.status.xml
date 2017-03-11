@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="780,380">
+    <Font name="" size="10" bold="false" italic="false" />
+    <VerticalLayout inset="5,10,5,10">
+        <HorizontalLayout>
+            <VerticalLayout width="170">
+                <Option name="status.current#opt" text="当前状态信息" float="true" pos="10,2,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selected="true" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="status.device#opt" text="设备状态信息" float="true" pos="10,62,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="status.r0#opt" text="??状态信息" float="true" pos="10,122,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="status.r2#opt" text="??状态信息" float="true" pos="10,182,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="status.maintenance#opt" text="保养维修信息" float="true" pos="10,242,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+                <Option name="status.other#opt" text="其它状态信息" float="true" pos="10,302,0,0" width="150" height="47" bordercolor="#002D2D2D" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="common.btn.normal.png" hotimage="common.btn.press.png" pushedimage="common.btn.pushed.png" disabledimage="common.btn.disable.png" pushedtextcolor="#00C04800" hottextcolor="#00FF8000" group="group.status" selectedimage="common.btn.pushed.png" selectedtextcolor="#00FF8000" />
+            </VerticalLayout>
+            <TabLayout name="status#tab" bordercolor="#002D2D2D" inset="1,1,1,1">
+                <Label name="status.text.debug#lbl" text="调试信息输出，需要进一步完善" float="true" pos="10,9,0,0" width="278" height="40" textpadding="6,0,7,0" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="left" />
+            </TabLayout>
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="480,390" sizebox="0,5,5,5" caption="0,0,0,50">
+    <VerticalLayout bkcolor="#FFFFFFFF">
+        <VerticalLayout height="33" bkcolor="#FF8F4CB1">
+            <Button name="btnClose" tooltip="关闭" float="true" pos="451,4,0,0" width="24" height="24" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" normalimage="close.png" hotimage="close_over.png" pushedimage="close_push.png" />
+        </VerticalLayout>
+        <VerticalLayout>
+            <Container height="50">
+                <Label text="调节你的摄像头效果：" float="true" pos="22,13,0,0" width="171" height="33" textpadding="4,0,0,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="0" align="leftvcenter" />
+            </Container>
+            <VerticalLayout>
+                <HorizontalLayout height="42">
+                    <Container width="120">
+                        <Label text="亮 度" float="true" pos="50,6,0,0" width="60" height="30" textpadding="3,0,3,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="0" align="rightvcenter" />
+                    </Container>
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="brightness#prg" width="60" height="30" bkcolor="#FF565656" bkcolor2="#00F6F8FB" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="brightness#lbl" float="true" pos="174,15,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+                <HorizontalLayout height="42">
+                    <Container width="120">
+                        <Label text="对比度" float="true" pos="50,6,0,0" width="60" height="30" textpadding="3,0,3,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="0" align="rightvcenter" />
+                    </Container>
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="contrast#prg" width="60" height="30" bkcolor="#FFFBF8F6" bkcolor2="#005D5D5D" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="contrast#lbl" float="true" pos="174,14,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+                <HorizontalLayout height="42">
+                    <Container width="120">
+                        <Label text="饱和度" float="true" pos="50,6,0,0" width="60" height="30" textpadding="3,0,3,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="0" align="rightvcenter" />
+                    </Container>
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="saturation#prg" width="60" height="30" bkcolor="#FF8C7272" bkcolor2="#00F61515" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="saturation#lbl" float="true" pos="174,15,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+                <HorizontalLayout height="42">
+                    <Container text="饱和度" width="120">
+                        <Label text="冷暖色" float="true" pos="51,6,0,0" width="60" height="30" textpadding="3,0,3,0" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" font="0" align="rightvcenter" />
+                    </Container>
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="colorEnable#prg" width="60" height="30" bkcolor="#FF10B6F9" bkcolor2="#00DECF21" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="colorEnable#lbl" float="true" pos="174,15,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+                <HorizontalLayout height="42">
+                    <Container width="120" />
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="brightness#prg" width="60" height="30" bkcolor="#FF565656" bkcolor2="#00F6F8FB" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="brightness#lbl" float="true" pos="174,15,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+                <HorizontalLayout height="42">
+                    <Container width="120" />
+                    <Container height="42" inset="5,18,5,19">
+                        <Progress name="brightness#prg" width="60" height="30" bkcolor="#FF565656" bkcolor2="#00F6F8FB" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centertop" min="0" max="100" value="50" isstretchfore="false" />
+                        <Label name="brightness#lbl" float="true" pos="174,15,0,0" width="13" height="13" bkimage="progress.fore.png" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="left" />
+                    </Container>
+                </HorizontalLayout>
+            </VerticalLayout>
+        </VerticalLayout>
+        <HorizontalLayout height="33" bkcolor="#FFF2E6F5" maxheight="33" minheight="33">
+            <Button name="reset#btn" text="还原为默认值" float="true" pos="10,3,0,0" width="80" height="27" textcolor="#FF000001" disabledtextcolor="#FFA7A6AA" align="centervcenter" />
+        </HorizontalLayout>
+    </VerticalLayout>
+</Window>

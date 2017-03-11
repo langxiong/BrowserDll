@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="780,380">
+    <Font name="" size="10" bold="false" italic="false" />
+    <HorizontalLayout>
+        <TileLayout columns="3">
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+            <VerticalLayout width="120" height="120">
+                <Label text="??" float="true" pos="23,7,0,0" width="74" height="23" textcolor="#00333333" disabledtextcolor="#FFA7A6AA" font="0" align="centervcenter" />
+                <Option float="true" pos="28,32,0,0" width="64" height="64" textcolor="#00F9FAFB" disabledtextcolor="#FFA7A6AA" font="1" align="centervcenter" normalimage="toggleSwitch.small.off.png" selectedimage="toggleSwitch.small.on.png" selectedtextcolor="#00333333" />
+            </VerticalLayout>
+        </TileLayout>
+        <VerticalLayout width="160">
+            <Text text="??&lt;n&gt;??&lt;n&gt;??" float="true" pos="25,18,0,0" width="111" height="132" bordercolor="#002D2D2D" textpadding="2,13,2,0" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" showhtml="true" align="centerwrap" />
+            <Text text="??&lt;n&gt;??&lt;n&gt;??" float="true" pos="25,205,0,0" width="111" height="132" bordercolor="#002D2D2D" textpadding="2,13,2,0" textcolor="#00010000" disabledtextcolor="#FFA7A6AA" font="2" showhtml="true" align="centerwrap" />
+        </VerticalLayout>
+    </HorizontalLayout>
+</Window>
