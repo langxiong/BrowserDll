@@ -97,9 +97,9 @@ HRESULT MyDocHostUIHandler::ShowContextMenu(/* [in] */ DWORD dwID,
             return E_NOTIMPL ;
         }
 
-		// TODO: 
-		return E_NOTIMPL;
-	}
+        // TODO: 
+        return E_NOTIMPL;
+    }
     return S_OK ;
 }
 
@@ -233,7 +233,7 @@ HRESULT MyDocHostUIHandler::GetExternal( /* [out] */ IDispatch **ppDispatch)
 {
     if (m_spJsExternal == NULL)
     {
-		m_spJsExternal = new JSExternal;
+        m_spJsExternal = new JSExternal;
     }
     return m_spJsExternal->QueryInterface(IID_IDispatch, (void **)ppDispatch) ;
 }
@@ -317,13 +317,13 @@ HRESULT MyDocHostUIHandler::Exec(
 
 STDMETHODIMP_(ULONG) MyDocHostUIHandler::AddRef(void)
 {
-	assert(m_lRefCount);
-	return (ULONG)::InterlockedIncrement(&m_lRefCount);
+    assert(m_lRefCount);
+    return (ULONG)::InterlockedIncrement(&m_lRefCount);
 }
 
 STDMETHODIMP_(ULONG) MyDocHostUIHandler::Release(void)
 {
-	assert(m_lRefCount);
+    assert(m_lRefCount);
     if (0 == ::InterlockedDecrement(&m_lRefCount))
     {
         delete this ;
@@ -365,7 +365,7 @@ HRESULT MyDocHostUIHandler::QueryInterface(REFIID riid, void** ppv)
     }
     else
     {
-		assert(false);
+        assert(false);
     }
     return E_NOINTERFACE ;
 }

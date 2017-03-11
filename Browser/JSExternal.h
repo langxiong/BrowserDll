@@ -19,7 +19,7 @@ public:
 
     /** 构造函数
     */
-	JSExternal() ;
+    JSExternal() ;
 
     /** 析构函数
     */
@@ -50,7 +50,7 @@ public:
 
 private:
 
-	std::vector<TExternalItem> m_externalItems;
+    std::vector<TExternalItem> m_externalItems;
 
     /** 引用计数
     */

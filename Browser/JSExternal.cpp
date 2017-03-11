@@ -2,7 +2,7 @@
 #include "JSExternal.h"
 
 JSExternal::JSExternal():
-	m_lRefCount(0)
+    m_lRefCount(0)
 {
 
 }
@@ -80,19 +80,19 @@ STDMETHODIMP JSExternal::GetIDsOfNames(REFIID, LPOLESTR* names, UINT namesCount,
         }
 
 
-		auto it = std::find_if(m_externalItems.cbegin(), m_externalItems.cend(), [funcName](const TExternalItem& item) {
-			return item.m_name == funcName;
-		});
+        auto it = std::find_if(m_externalItems.cbegin(), m_externalItems.cend(), [funcName](const TExternalItem& item) {
+            return item.m_name == funcName;
+        });
 
-		if (it == m_externalItems.cend())
-		{
-			hresult = ResultFromScode(DISP_E_UNKNOWNNAME);
-			identify[i] = DISPID_UNKNOWN;
-		}
-		else
-		{
-			identify[i] = (DISPID)(std::distance(m_externalItems.cbegin(), it) + 1);
-		}
+        if (it == m_externalItems.cend())
+        {
+            hresult = ResultFromScode(DISP_E_UNKNOWNNAME);
+            identify[i] = DISPID_UNKNOWN;
+        }
+        else
+        {
+            identify[i] = (DISPID)(std::distance(m_externalItems.cbegin(), it) + 1);
+        }
     }
     return hresult ;
 }
