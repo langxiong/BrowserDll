@@ -105,6 +105,7 @@
     <ClInclude Include="..\..\AppMain\resource.h" />
     <ClInclude Include="..\..\include\AppCommon.h" />
     <ClInclude Include="..\..\include\DateTimeUtil.h" />
+    <ClInclude Include="..\..\include\MyString.h" />
     <ClInclude Include="..\..\include\StringHelper.h" />
     <ClInclude Include="..\..\AppMain\FindUtil.h" />
     <ClInclude Include="..\..\AppMain\stdafx.h" />

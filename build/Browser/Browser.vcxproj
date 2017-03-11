@@ -98,16 +98,27 @@
   <ItemGroup>
     <ClInclude Include="..\..\Browser\BrowserDefine.h" />
     <ClInclude Include="..\..\Browser\MyBrowser.h" />
+    <ClInclude Include="..\..\Browser\JSExternal.h" />
+    <ClInclude Include="..\..\Browser\MyDocHostUIHandler.h" />
+    <ClInclude Include="..\..\Browser\resource.h" />
     <ClInclude Include="..\..\Browser\stdafx.h" />
     <ClInclude Include="..\..\Browser\targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Browser\dllmain.cpp" />
     <ClCompile Include="..\..\Browser\MyBrowser.cpp" />
+    <ClCompile Include="..\..\Browser\JSExternal.cpp" />
+    <ClCompile Include="..\..\Browser\MyDocHostUIHandler.cpp" />
     <ClCompile Include="..\..\Browser\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Browser\MyUI.aps" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Browser\MyUI.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

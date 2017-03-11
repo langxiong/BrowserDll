@@ -39,6 +39,15 @@
     <ClInclude Include="..\..\Browser\MyBrowser.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Browser\resource.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\JSExternal.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\MyDocHostUIHandler.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Browser\dllmain.cpp">
@@ -50,5 +59,19 @@
     <ClCompile Include="..\..\Browser\MyBrowser.cpp">
       <Filter>Common\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Browser\JSExternal.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\MyDocHostUIHandler.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Browser\MyUI.aps" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Browser\MyUI.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
