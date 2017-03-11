@@ -50,13 +50,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\build_temp\$(PlatformName)\compile\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>CameraMonitor</TargetName>
+    <TargetName>BrowserTest</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\build_temp\$(PlatformName)\compile\$(Configuration)\$(ProjectName)\</IntDir>
-    <TargetName>CameraMonitor</TargetName>
+    <TargetName>BrowserTest</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -122,6 +122,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\.gitignore" />
     <None Include="..\..\bin\debug\AppMain.properties" />
   </ItemGroup>
   <ItemGroup>

@@ -97,6 +97,9 @@
     <None Include="..\..\bin\debug\AppMain.properties">
       <Filter>Resources</Filter>
     </None>
+    <None Include="..\..\.gitignore">
+      <Filter>Resources</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\AppMain\AppMain.rc">
