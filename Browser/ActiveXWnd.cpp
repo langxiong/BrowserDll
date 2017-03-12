@@ -28,7 +28,7 @@ namespace MyWeb
         if (m_pOwner == NULL) return;
         if (m_pOwner->m_pOwner == NULL) return;
         IOleObject* pUnk = NULL;
-        m_pOwner->m_pOwner->GetControl(IID_IOleObject, (LPVOID*)&pUnk);
+        m_pOwner->m_pOwner->QueryInterface(IID_IOleObject, (LPVOID*)&pUnk);
         if (pUnk == NULL) return;
         CComPtr<IOleObject> RefOleObject = pUnk;
         IOleClientSite* pOleClientSite = NULL;
@@ -64,7 +64,7 @@ namespace MyWeb
     LRESULT CActiveXWnd::OnMouseActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
     {
         IOleObject* pUnk = NULL;
-        m_pOwner->m_pOwner->GetControl(IID_IOleObject, (LPVOID*)&pUnk);
+        m_pOwner->m_pOwner->QueryInterface(IID_IOleObject, (LPVOID*)&pUnk);
         if (pUnk == NULL) return 0;
         CComPtr<IOleObject> RefOleObject = pUnk;
         DWORD dwMiscStatus = 0;

@@ -10,4 +10,10 @@ namespace MyWeb
 
         std::function<void(DISPPARAMS* params, VARIANT* result)>  m_pFnRun;
     };
+
+    enum
+    {
+        WM_WEB_THREAD_DO_INITIALIZE = WM_USER + 0x100,
+        WM_WEB_THREAD_SET_BROWSER_POS
+    };
 }

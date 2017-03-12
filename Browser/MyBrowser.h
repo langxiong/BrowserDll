@@ -24,6 +24,8 @@ extern "C"
     int MYBROWSER_API CreateBrowserCtrl(HWND hBindWnd);
     void MYBROWSER_API DestroyBrowserCtrl(int nIndex);
 
+    void MYBROWSER_API SetBrowserCtrlPos(int nIndex, RECT rc);
+
     void MYBROWSER_API NavigateUrl(int nIndex, const TCHAR* url);
     void MYBROWSER_API ExecuteJSCode(int nIndex, const TCHAR* jsCode);
 

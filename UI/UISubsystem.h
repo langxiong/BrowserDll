@@ -59,6 +59,8 @@ namespace MyWeb {
             int CreateBrowserCtrl(HWND hBindWnd);
             void DestroyBrowserCtrl(int nIndex);
 
+            void SetBrowserCtrlPos(int nIndex, RECT rc);
+
             void NavigateUrl(int nIndex, const MyString& url);
             void ExecuteJSCode(int nIndex, const MyString& jsCode);
 

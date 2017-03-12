@@ -46,6 +46,14 @@ namespace MyWeb {
             }
         }
 
+        void CUISubsystem::SetBrowserCtrlPos(int nIndex, RECT rc)
+        {
+            if (m_spBrowserModuleApis->_setBrowserCtrlPos)
+            {
+                return m_spBrowserModuleApis->_setBrowserCtrlPos(nIndex, rc);
+            }
+        }
+
         void CUISubsystem::NavigateUrl(int nIndex, const MyString& url)
         {
             if (m_spBrowserModuleApis->_navigateUrl)
@@ -143,6 +151,12 @@ namespace MyWeb {
             if (pFunc)
             {
                 m_spBrowserModuleApis->_destroyBrowserCtrl = cast_to_function<void (int)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "SetBrowserCtrlPos");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_setBrowserCtrlPos = cast_to_function<void(int, RECT)>(pFunc);
             }
 
             pFunc = ::GetProcAddress(m_hBrowserModule, "NavigateUrl");

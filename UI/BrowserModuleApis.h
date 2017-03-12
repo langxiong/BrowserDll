@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <tchar.h>
+#include <WinDef.h>
 
 namespace MyWeb
 {
@@ -11,6 +12,8 @@ namespace MyWeb
         {
             std::function<int (HWND hBindWnd)>  _createBrowserCtrl;
             std::function<void (int)>           _destroyBrowserCtrl;
+
+            std::function<void(int, RECT)>     _setBrowserCtrlPos;
 
             std::function<void (int, const TCHAR*)>  _navigateUrl;
             std::function<void (int, const TCHAR*)>  _executeJSCode;

@@ -3,17 +3,43 @@
 #include "MyString.h"
 #include <memory>
 #include <thread>
+#include <ExDisp.h>
 
 namespace MyWeb
 {
     class MyBrowserCtrl
     {
         friend class CActiveXCtrl;
+
+        struct TData
+        {
+            HANDLE _hThreadHandle;
+            DWORD _dwThreadId;
+            std::shared_ptr<MyBrowserCtrl> _spBrowserCtrl;
+           
+            ~TData()
+            {
+                if (_hThreadHandle)
+                {
+                    ::CloseHandle(_hThreadHandle);
+                }
+            }
+        };
     public:
 
         explicit MyBrowserCtrl(HWND hBindWnd);
 
         ~MyBrowserCtrl();
+
+        void MessageLoopThread();
+
+        bool HandleCustomThreadMsg(const MSG& msg);
+
+        void WaitThreadMsgQueueCreate();
+        void QuitThreadMsgQueue();
+
+        HANDLE GetThreadHandle() const;
+        DWORD GetThreadId() const;
 
         void SetBindWindow(HWND hBindWnd);
         HWND GetBindWindow() const;
@@ -21,9 +47,10 @@ namespace MyWeb
         void SetHostWindow(HWND hHostWnd);
         HWND GetHostWindow() const;
 
+        void NavigateUrl(const MyString& url);
+
         bool CreateControl(const CLSID clsid);
         bool CreateControl(LPCTSTR pstrCLSID);
-        HRESULT GetControl(const IID iid, LPVOID* ppRet);
 
         virtual HRESULT GetExternalCall(LPVOID* ppRet);
 
@@ -43,6 +70,7 @@ namespace MyWeb
     public:
         static int CreateBrowserCtrl(HWND hBindWnd);
         static void DestroyBrowserCtrl(int nIndex);
+        static void SetBrowserCtrlPos(int nIndex, RECT rc);
 
     private:
         virtual void ReleaseControl();
@@ -50,17 +78,19 @@ namespace MyWeb
 
     private:
         static int sm_nIndex;
-        static std::map<int, std::shared_ptr<MyBrowserCtrl>> sm_spBrowserCtrls;
+        static std::map<int, TData> sm_spBrowserCtrls;
 
         CLSID m_clsid;
         RECT m_rcItem;
         IOleObject* m_pUnk;
         CActiveXCtrl* m_pControl;
+        CComPtr<IWebBrowser2> m_spWebBrowser2;
         HWND m_hBindWnd;
         HWND m_hHostWnd;
         bool m_bCreated;
 
-        std::thread* m_pThread;
+        HANDLE m_hInitEvent;
+        DWORD m_dwWebWorkThreadId;
     };
 }
 

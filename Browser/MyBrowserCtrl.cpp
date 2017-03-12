@@ -2,6 +2,8 @@
 #include "MyBrowserCtrl.h"
 #include "ActiveXCtrl.h"
 #include "ActiveXWnd.h"
+#include "MyOleInitialize.h"
+#include "BrowserDefine.h"
 
 #include <WindowsX.h>
 
@@ -28,7 +30,7 @@ namespace MyWeb
     }
 
     int MyBrowserCtrl::sm_nIndex = 0;
-    std::map<int, std::shared_ptr<MyBrowserCtrl>> MyBrowserCtrl::sm_spBrowserCtrls;
+    std::map<int, MyBrowserCtrl::TData> MyBrowserCtrl::sm_spBrowserCtrls;
 
     MyBrowserCtrl::MyBrowserCtrl(HWND hBindWnd) : 
         m_pUnk(NULL), 
@@ -36,14 +38,100 @@ namespace MyWeb
         m_hBindWnd(hBindWnd),
         m_hHostWnd(NULL), 
         m_bCreated(false),
-        m_pThread(new std::thread)
+        m_hInitEvent(::CreateEvent(NULL, FALSE, FALSE, NULL)),
+        m_dwWebWorkThreadId(0)
     {
         m_clsid = IID_NULL;
     }
 
     MyBrowserCtrl::~MyBrowserCtrl()
     {
+        if (m_hInitEvent)
+        {
+            ::CloseHandle(m_hInitEvent);
+        }
+    }
+
+    void MyBrowserCtrl::MessageLoopThread()
+    {
+        m_dwWebWorkThreadId = ::GetCurrentThreadId();
+        MyOleInitialize oleInit;
+        //创建线程的消息队列
+        MSG msg = { 0 };
+        ::PeekMessage(&msg, NULL, WM_USER, WM_USER, PM_NOREMOVE);
+
+        ::PostThreadMessage(m_dwWebWorkThreadId, WM_WEB_THREAD_DO_INITIALIZE, NULL, NULL);
+        //进入主线程消息循环
+        while (::GetMessage(&msg, 0, 0, 0) > 0)
+        {
+            if (!msg.hwnd && HandleCustomThreadMsg(msg))
+            {
+                continue;
+            }
+            ::TranslateMessage(&msg);
+            ::DispatchMessage(&msg);
+            ::Sleep(10);
+        }
+
         ReleaseControl();
+    }
+
+    bool MyBrowserCtrl::HandleCustomThreadMsg(const MSG & msg)
+    {
+        if (msg.message == WM_WEB_THREAD_DO_INITIALIZE)
+        {
+            if (m_hInitEvent)
+            {
+                ::SetEvent(m_hInitEvent);
+            }
+
+            if (CreateControl(CLSID_WebBrowser))
+            {
+                NavigateUrl(_T("http://www.2345.com/"));
+            }
+
+            return true;
+        }
+        if (msg.message == WM_WEB_THREAD_SET_BROWSER_POS)
+        {
+            if (msg.wParam)
+            {
+                LPRECT pRc = reinterpret_cast<LPRECT>(msg.wParam);
+                SetPos(*pRc);
+                delete pRc;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    void MyBrowserCtrl::WaitThreadMsgQueueCreate()
+    {
+        ::WaitForSingleObject(m_hInitEvent, INFINITE);
+        ::CloseHandle(m_hInitEvent);
+        m_hInitEvent = NULL;
+    }
+
+    void MyBrowserCtrl::QuitThreadMsgQueue()
+    {
+        if (m_dwWebWorkThreadId)
+        {
+            ::PostThreadMessage(m_dwWebWorkThreadId, WM_QUIT, 0, 0);
+        }
+    }
+
+    HANDLE MyBrowserCtrl::GetThreadHandle() const
+    {
+        if (!m_dwWebWorkThreadId)
+        {
+            return NULL;
+        }
+        return ::OpenThread(SYNCHRONIZE, FALSE, m_dwWebWorkThreadId);
+    }
+
+    DWORD MyBrowserCtrl::GetThreadId() const
+    {
+        return m_dwWebWorkThreadId;
     }
 
     void MyBrowserCtrl::SetBindWindow(HWND hBindWnd)
@@ -66,6 +154,17 @@ namespace MyWeb
         return m_hHostWnd;
     }
 
+    void MyBrowserCtrl::NavigateUrl(const MyString& url)
+    {
+        if (m_spWebBrowser2 && (!url.empty()))
+        {
+            CComVariant vurl = url.c_str();
+            CComVariant vempty;
+
+            m_spWebBrowser2->Navigate2(&vurl, &vempty, &vempty, &vempty, &vempty);
+        }
+    }
+
     void MyBrowserCtrl::SetVisible(bool bVisible)
     {
         if (m_hHostWnd)
@@ -76,6 +175,7 @@ namespace MyWeb
 
     void MyBrowserCtrl::SetPos(RECT rc)
     {
+        m_rcItem = rc;
         if (m_pUnk == NULL) return;
         if (m_pControl == NULL) return;
 
@@ -92,13 +192,13 @@ namespace MyWeb
             RECT rcItem = m_rcItem;
             if (!m_pControl->m_bWindowless)
             {
-                // rcItem.ResetOffset();
+                ::OffsetRect(&rcItem, -rcItem.left, -rcItem.top);
             }
             m_pControl->m_pInPlaceObject->SetObjectRects(&rcItem, &rcItem);
         }
         if (!m_pControl->m_bWindowless) {
             assert(m_pControl->m_pWindow);
-            ::MoveWindow(*m_pControl->m_pWindow, m_rcItem.left, m_rcItem.top, m_rcItem.right - m_rcItem.left, m_rcItem.bottom - m_rcItem.top, TRUE);
+            ::MoveWindow(*m_pControl->m_pWindow, 0, 0, m_rcItem.right - m_rcItem.left, m_rcItem.bottom - m_rcItem.top, TRUE);
         }
     }
 
@@ -170,14 +270,47 @@ namespace MyWeb
         }
 
         int nIndex = sm_nIndex;
-        sm_spBrowserCtrls[sm_nIndex++] = std::make_shared<MyBrowserCtrl>(MyBrowserCtrl(hBindWnd));
+        std::shared_ptr<MyBrowserCtrl> spBrowserCtrl(new MyBrowserCtrl(hBindWnd));
+        
+        std::thread t([&]() {
+            spBrowserCtrl->MessageLoopThread();
+        });
+
+        t.detach();
+
+        spBrowserCtrl->WaitThreadMsgQueueCreate();
+        sm_spBrowserCtrls[sm_nIndex++] = { spBrowserCtrl->GetThreadHandle(), spBrowserCtrl->GetThreadId(), spBrowserCtrl};
 
         return nIndex;
     }
 
     void MyBrowserCtrl::DestroyBrowserCtrl(int nIndex)
     {
-        sm_spBrowserCtrls.erase(nIndex);
+        auto it = sm_spBrowserCtrls.find(nIndex);
+        if (it == sm_spBrowserCtrls.cend())
+        {
+            return;
+        }
+
+        ::PostThreadMessage(it->second._dwThreadId, WM_QUIT, NULL, NULL);
+        ::WaitForSingleObject(it->second._hThreadHandle, INFINITE);
+        sm_spBrowserCtrls.erase(it);
+    }
+
+    void MyBrowserCtrl::SetBrowserCtrlPos(int nIndex, RECT rc)
+    {
+        auto it = sm_spBrowserCtrls.find(nIndex);
+        if (it == sm_spBrowserCtrls.cend())
+        {
+            return;
+        }
+
+        LPRECT pRc = new RECT(rc);
+        DWORD ret = ::PostThreadMessage(it->second._dwThreadId, WM_WEB_THREAD_SET_BROWSER_POS, (WPARAM)pRc, NULL);
+        if (ret == 0)
+        {
+            delete pRc;
+        }
     }
 
     bool MyBrowserCtrl::CreateControl(LPCTSTR pstrCLSID)
@@ -236,8 +369,8 @@ namespace MyWeb
         
         IOleControl* pOleControl = NULL;
 
-        HRESULT Hr = ::CoCreateInstance(m_clsid, NULL, CLSCTX_ALL, IID_IOleControl, (LPVOID*)&pOleControl);
-        if (FAILED(Hr))
+        HRESULT hr = ::CoCreateInstance(m_clsid, NULL, CLSCTX_ALL, IID_IOleControl, (LPVOID*)&pOleControl);
+        if (FAILED(hr))
         {
             return false;
         }
@@ -258,38 +391,32 @@ namespace MyWeb
         IPersistStreamInit* pPersistStreamInit = NULL;
         m_pUnk->QueryInterface(IID_IPersistStreamInit, (LPVOID*)&pPersistStreamInit);
         if (pPersistStreamInit != NULL) {
-            Hr = pPersistStreamInit->InitNew();
+            hr = pPersistStreamInit->InitNew();
             pPersistStreamInit->Release();
         }
-        if (FAILED(Hr)) return false;
+        if (FAILED(hr)) return false;
         if ((dwMiscStatus & OLEMISC_SETCLIENTSITEFIRST) == 0) m_pUnk->SetClientSite(pOleClientSite);
         // Grab the view...
-        Hr = m_pUnk->QueryInterface(IID_IViewObjectEx, (LPVOID*)&m_pControl->m_pViewObject);
-        if (FAILED(Hr)) Hr = m_pUnk->QueryInterface(IID_IViewObject2, (LPVOID*)&m_pControl->m_pViewObject);
-        if (FAILED(Hr)) Hr = m_pUnk->QueryInterface(IID_IViewObject, (LPVOID*)&m_pControl->m_pViewObject);
+        hr = m_pUnk->QueryInterface(IID_IViewObjectEx, (LPVOID*)&m_pControl->m_pViewObject);
+        if (FAILED(hr)) hr = m_pUnk->QueryInterface(IID_IViewObject2, (LPVOID*)&m_pControl->m_pViewObject);
+        if (FAILED(hr)) hr = m_pUnk->QueryInterface(IID_IViewObject, (LPVOID*)&m_pControl->m_pViewObject);
         // Activate and done...
         m_pUnk->SetHostNames(OLESTR("UIActiveX"), NULL);
         if ((dwMiscStatus & OLEMISC_INVISIBLEATRUNTIME) == 0 && ::IsWindow(m_hHostWnd)) 
         {
-            Hr = m_pUnk->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, pOleClientSite, 0, m_hHostWnd, &m_rcItem);
+            hr = m_pUnk->DoVerb(OLEIVERB_INPLACEACTIVATE, NULL, pOleClientSite, 0, m_hHostWnd, &m_rcItem);
         }
-        IObjectWithSite* pSite = NULL;
-        m_pUnk->QueryInterface(IID_IObjectWithSite, (LPVOID*)&pSite);
-        if (pSite != NULL) {
-            pSite->SetSite(static_cast<IOleClientSite*>(m_pControl));
-            pSite->Release();
-        }
-        return SUCCEEDED(Hr);
-    }
 
-    HRESULT MyBrowserCtrl::GetControl(const IID iid, LPVOID* ppRet)
-    {
-        assert(ppRet != NULL);
-        //assert(*ppRet==NULL);
-        if (ppRet == NULL) return E_POINTER;
-        *ppRet = NULL;
-        if (m_pUnk == NULL) return E_PENDING;
-        return m_pUnk->QueryInterface(iid, (LPVOID*)ppRet);
+        {
+            CComPtr<IObjectWithSite> spSite;
+            hr = m_pUnk->QueryInterface(IID_IObjectWithSite, (LPVOID*)&spSite);
+            if (spSite) {
+                spSite->SetSite(static_cast<IOleClientSite*>(m_pControl));
+            }
+        }
+        hr = m_pUnk->QueryInterface(IID_IWebBrowser2, (LPVOID*)&m_spWebBrowser2);
+        
+        return SUCCEEDED(hr);
     }
 
     HRESULT MyBrowserCtrl::GetExternalCall(LPVOID* ppRet)
@@ -299,13 +426,13 @@ namespace MyWeb
 
     STDMETHODIMP MyBrowserCtrl::QueryInterface(REFIID iid, void ** ppvObject)
     {
-        return E_NOTIMPL;
+        assert(ppvObject != NULL);
+        //assert(*ppRet==NULL);
+        if (ppvObject == NULL) return E_POINTER;
+        *ppvObject = NULL;
+        if (m_pUnk == NULL) return E_PENDING;
+        return m_pUnk->QueryInterface(iid, (LPVOID*)ppvObject);
     }
-    //HRESULT MyBrowserCtrl::Download(IMoniker *pmk,IBindCtx *pbc,DWORD dwBindVerb,LONG grfBINDF,BINDINFO *pBindInfo,
-    //                         LPCOLESTR pszHeaders,LPCOLESTR pszRedir,UINT uiCP)
-    //{
-    //    return S_FALSE;
-    //}
 
     CLSID MyBrowserCtrl::GetClisd() const
     {

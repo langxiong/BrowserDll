@@ -18,6 +18,11 @@ extern "C"
         return MyBrowserCtrl::DestroyBrowserCtrl(nIndex);
     }
 
+    void MYBROWSER_API SetBrowserCtrlPos(int nIndex, RECT rc)
+    {
+        return MyBrowserCtrl::SetBrowserCtrlPos(nIndex, rc);
+    }
+
     void NavigateUrl(int nIndex, const TCHAR * url)
     {
     }

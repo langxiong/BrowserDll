@@ -103,6 +103,7 @@
     <ClInclude Include="..\..\Browser\JSExternal.h" />
     <ClInclude Include="..\..\Browser\MyBrowserCtrl.h" />
     <ClInclude Include="..\..\Browser\MyDocHostUIHandler.h" />
+    <ClInclude Include="..\..\Browser\MyOleInitialize.h" />
     <ClInclude Include="..\..\Browser\MyWindow.h" />
     <ClInclude Include="..\..\Browser\resource.h" />
     <ClInclude Include="..\..\Browser\stdafx.h" />
@@ -116,6 +117,7 @@
     <ClCompile Include="..\..\Browser\JSExternal.cpp" />
     <ClCompile Include="..\..\Browser\MyBrowserCtrl.cpp" />
     <ClCompile Include="..\..\Browser\MyDocHostUIHandler.cpp" />
+    <ClCompile Include="..\..\Browser\MyOleInitialize.cpp" />
     <ClCompile Include="..\..\Browser\MyWindow.cpp" />
     <ClCompile Include="..\..\Browser\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

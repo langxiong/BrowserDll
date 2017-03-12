@@ -82,6 +82,8 @@ namespace DuiLib
 		{
 			::SetWindowPos(m_pBindWnd->GetHWND(), NULL, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top,
 				SWP_NOACTIVATE | SWP_NOREDRAW | SWP_NOZORDER | SWP_SHOWWINDOW);
+
+            GetUISubsystem().SetBrowserCtrlPos(m_nIndex, rc);
 		}
     }
 
