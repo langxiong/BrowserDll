@@ -56,12 +56,13 @@ namespace MyWeb
     {
         m_dwWebWorkThreadId = ::GetCurrentThreadId();
         MyOleInitialize oleInit;
-        //创建线程的消息队列
+        //锟斤拷锟斤拷锟竭程碉拷锟斤拷息锟斤拷锟斤拷
         MSG msg = { 0 };
         ::PeekMessage(&msg, NULL, WM_USER, WM_USER, PM_NOREMOVE);
 
         ::PostThreadMessage(m_dwWebWorkThreadId, WM_WEB_THREAD_DO_INITIALIZE, NULL, NULL);
-        //进入主线程消息循环
+
+        //锟斤拷锟斤拷锟斤拷锟竭筹拷锟斤拷息循锟斤拷
         while (::GetMessage(&msg, 0, 0, 0) > 0)
         {
             if (!msg.hwnd && HandleCustomThreadMsg(msg))
@@ -107,17 +108,13 @@ namespace MyWeb
 
     void MyBrowserCtrl::WaitThreadMsgQueueCreate()
     {
-        ::WaitForSingleObject(m_hInitEvent, INFINITE);
+        DWORD ret = ::WaitForSingleObject(m_hInitEvent, INFINITE);
+        if (ret == WAIT_FAILED)
+        {
+            std::cout << "WaitThreadMsgQueueCreate failed with err " << GetLastError() << std::endl;
+        }
         ::CloseHandle(m_hInitEvent);
         m_hInitEvent = NULL;
-    }
-
-    void MyBrowserCtrl::QuitThreadMsgQueue()
-    {
-        if (m_dwWebWorkThreadId)
-        {
-            ::PostThreadMessage(m_dwWebWorkThreadId, WM_QUIT, 0, 0);
-        }
     }
 
     HANDLE MyBrowserCtrl::GetThreadHandle() const
@@ -128,7 +125,6 @@ namespace MyWeb
         }
         return ::OpenThread(SYNCHRONIZE, FALSE, m_dwWebWorkThreadId);
     }
-
     DWORD MyBrowserCtrl::GetThreadId() const
     {
         return m_dwWebWorkThreadId;
@@ -292,8 +288,18 @@ namespace MyWeb
             return;
         }
 
-        ::PostThreadMessage(it->second._dwThreadId, WM_QUIT, NULL, NULL);
-        ::WaitForSingleObject(it->second._hThreadHandle, INFINITE);
+        DWORD ret = ::PostThreadMessage(it->second._dwThreadId, WM_QUIT, NULL, NULL);
+        if (ret != 0)
+        {
+            ret = ::WaitForSingleObject(it->second._hThreadHandle, INFINITE);
+            if (ret == WAIT_FAILED)
+            {
+                DWORD nLastErr = ::GetLastError();
+                std::cout << "DestroyBrowserCtrl failed to waitthread exit with err " << GetLastError() << std::endl;
+            }
+            // 不在析构函数中消除， 因赋值时，临时变量的产生会导致析构函数的调用
+            ::CloseHandle(it->second._hThreadHandle);
+        }
         sm_spBrowserCtrls.erase(it);
     }
 

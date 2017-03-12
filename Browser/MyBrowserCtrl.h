@@ -16,14 +16,6 @@ namespace MyWeb
             HANDLE _hThreadHandle;
             DWORD _dwThreadId;
             std::shared_ptr<MyBrowserCtrl> _spBrowserCtrl;
-           
-            ~TData()
-            {
-                if (_hThreadHandle)
-                {
-                    ::CloseHandle(_hThreadHandle);
-                }
-            }
         };
     public:
 
@@ -36,7 +28,6 @@ namespace MyWeb
         bool HandleCustomThreadMsg(const MSG& msg);
 
         void WaitThreadMsgQueueCreate();
-        void QuitThreadMsgQueue();
 
         HANDLE GetThreadHandle() const;
         DWORD GetThreadId() const;

@@ -28,15 +28,15 @@ namespace DuiLib
 
     CTestBrowserUI::~CTestBrowserUI()
     {
+        if (m_nIndex != -1)
+        {
+            GetUISubsystem().DestroyBrowserCtrl(m_nIndex);
+        }
         if (m_pBindWnd)
         {
             delete m_pBindWnd;
         }
 
-        if (m_nIndex != -1)
-        {
-            GetUISubsystem().DestroyBrowserCtrl(m_nIndex);
-        }
     }
 
     void CTestBrowserUI::DoInit()
