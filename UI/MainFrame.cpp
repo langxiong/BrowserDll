@@ -8,13 +8,15 @@
 #include "Poco/Nullable.h"
 #include "Poco/Dynamic/Struct.h"
 
-#include "StringHelper.h"
 #include <vector>
 #include <unordered_map>
 #include <random>
 #include <ppltasks.h>
 
 #include "DateTimeUtil.h"
+#include "StringHelper.h"
+#include "UITestBrowser.h"
+
 
 using namespace DuiLib;
 using namespace Poco;
@@ -157,12 +159,11 @@ namespace MyWeb {
 
         CControlUI* CMainFrame::CreateControl(LPCTSTR pstrClass)
         {
-			/*if (_tcscmp(pstrClass, CCameraVideoUI::DUI_CTR_CAMERA_VIDEO) == 0)
+			if (_tcscmp(pstrClass, _T("TestBrowser")) == 0)
 			{
-				m_pCameraVideo = new DuiLib::CCameraVideoUI;
-				return m_pCameraVideo;
+                return new CTestBrowserUI;
 			}
-*/
+
             return WindowImplBase::CreateControl(pstrClass);
         }
 

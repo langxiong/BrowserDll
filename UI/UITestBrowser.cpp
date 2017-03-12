@@ -1,6 +1,14 @@
 ﻿#include "StdAfx.h"
 #include "UITestBrowser.h"
 
+namespace
+{
+    MyWeb::UI::CUISubsystem& GetUISubsystem()
+    {
+        return Poco::Util::Application::instance().getSubsystem<MyWeb::UI::CUISubsystem>();
+    }
+
+}
 namespace DuiLib
 {
     class CBindWnd : public CWindowWnd
@@ -13,7 +21,8 @@ namespace DuiLib
     };
 
     CTestBrowserUI::CTestBrowserUI():
-        m_pBindWnd(NULL)
+        m_pBindWnd(NULL),
+        m_nIndex(-1)
     {
     }
 
@@ -22,6 +31,11 @@ namespace DuiLib
         if (m_pBindWnd)
         {
             delete m_pBindWnd;
+        }
+
+        if (m_nIndex != -1)
+        {
+            GetUISubsystem().DestroyBrowserCtrl(m_nIndex);
         }
     }
 
@@ -44,6 +58,8 @@ namespace DuiLib
             {
                 return;
             }
+
+            m_nIndex = GetUISubsystem().CreateBrowserCtrl(hWnd);
         }
     }
 

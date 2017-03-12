@@ -25,5 +25,6 @@ namespace DuiLib
         virtual void SetPos(RECT rc);
     private:
         CWindowWnd* m_pBindWnd;
+        int m_nIndex;
     };
 } // namespace DuiLib

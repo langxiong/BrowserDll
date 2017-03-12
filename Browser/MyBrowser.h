@@ -18,3 +18,15 @@
 #include <windows.h>
 
 #include "BrowserDefine.h"
+
+extern "C"
+{
+    int MYBROWSER_API CreateBrowserCtrl(HWND hBindWnd);
+    void MYBROWSER_API DestroyBrowserCtrl(int nIndex);
+
+    void MYBROWSER_API NavigateUrl(int nIndex, const TCHAR* url);
+    void MYBROWSER_API ExecuteJSCode(int nIndex, const TCHAR* jsCode);
+
+    bool MYBROWSER_API RegisterBrowserCallback(int nIndex);
+    bool MYBROWSER_API UnRegisterBrowserCallback(int nIndex);
+}

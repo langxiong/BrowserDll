@@ -27,12 +27,16 @@ namespace MyWeb
         }
     }
 
+    int MyBrowserCtrl::sm_nIndex = 0;
+    std::map<int, std::shared_ptr<MyBrowserCtrl>> MyBrowserCtrl::sm_spBrowserCtrls;
+
     MyBrowserCtrl::MyBrowserCtrl(HWND hBindWnd) : 
         m_pUnk(NULL), 
         m_pControl(NULL), 
         m_hBindWnd(hBindWnd),
         m_hHostWnd(NULL), 
-        m_bCreated(false)
+        m_bCreated(false),
+        m_pThread(new std::thread)
     {
         m_clsid = IID_NULL;
     }
@@ -51,7 +55,6 @@ namespace MyWeb
     {
         return m_hBindWnd;
     }
-
 
     void MyBrowserCtrl::SetHostWindow(HWND hHostWnd)
     {
@@ -157,6 +160,24 @@ namespace MyWeb
         HRESULT Hr = m_pControl->m_pInPlaceObject->OnWindowMessage(uMsg, wParam, lParam, &lResult);
         if (Hr == S_OK) bHandled = bWasHandled;
         return lResult;
+    }
+
+    int MyBrowserCtrl::CreateBrowserCtrl(HWND hBindWnd)
+    {
+        if (!::IsWindow(hBindWnd))
+        {
+            return -1;
+        }
+
+        int nIndex = sm_nIndex;
+        sm_spBrowserCtrls[sm_nIndex++] = std::make_shared<MyBrowserCtrl>(MyBrowserCtrl(hBindWnd));
+
+        return nIndex;
+    }
+
+    void MyBrowserCtrl::DestroyBrowserCtrl(int nIndex)
+    {
+        sm_spBrowserCtrls.erase(nIndex);
     }
 
     bool MyBrowserCtrl::CreateControl(LPCTSTR pstrCLSID)

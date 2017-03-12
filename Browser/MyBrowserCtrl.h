@@ -1,6 +1,8 @@
 #pragma once
 
 #include "MyString.h"
+#include <memory>
+#include <thread>
 
 namespace MyWeb
 {
@@ -8,6 +10,7 @@ namespace MyWeb
     {
         friend class CActiveXCtrl;
     public:
+
         explicit MyBrowserCtrl(HWND hBindWnd);
 
         ~MyBrowserCtrl();
@@ -37,11 +40,18 @@ namespace MyWeb
 
         LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 
-    protected:
+    public:
+        static int CreateBrowserCtrl(HWND hBindWnd);
+        static void DestroyBrowserCtrl(int nIndex);
+
+    private:
         virtual void ReleaseControl();
         virtual bool DoCreateControl();
 
-    protected:
+    private:
+        static int sm_nIndex;
+        static std::map<int, std::shared_ptr<MyBrowserCtrl>> sm_spBrowserCtrls;
+
         CLSID m_clsid;
         RECT m_rcItem;
         IOleObject* m_pUnk;
@@ -49,6 +59,8 @@ namespace MyWeb
         HWND m_hBindWnd;
         HWND m_hHostWnd;
         bool m_bCreated;
+
+        std::thread* m_pThread;
     };
 }
 

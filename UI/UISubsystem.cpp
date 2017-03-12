@@ -96,6 +96,7 @@ namespace MyWeb {
 
             // load browser library;
             m_hBrowserModule = ::LoadLibraryA((appDir + "Browser.dll").c_str());
+            _InitBrowserModuleApis();
         }
 
         void CUISubsystem::uninitialize()

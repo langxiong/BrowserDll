@@ -127,7 +127,7 @@
                 </HorizontalLayout>
                 <VerticalLayout inset="10,0,10,0" childpadding="14">
                     <Container>
-                        <CameraVideo />
+                        <TestBrowser />
                     </Container>
                     <HorizontalLayout height="150">
                         <Container width="55">
