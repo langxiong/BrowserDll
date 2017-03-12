@@ -4,6 +4,7 @@
 #include <memory>
 #include <thread>
 #include <ExDisp.h>
+#include <Mshtml.h>
 
 namespace MyWeb
 {
@@ -58,6 +59,10 @@ namespace MyWeb
         void SetFocus();
 
         LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
+
+    private:
+
+        bool GetHTMLWindow(CComPtr<IHTMLWindow2>& spHtmlWindow);
 
     public:
         static int CreateBrowserCtrl(HWND hBindWnd);

@@ -6,6 +6,8 @@
 #include "BrowserDefine.h"
 
 #include <WindowsX.h>
+#include <comutil.h>
+#pragma comment(lib, "comsuppw.lib")
 
 #define lengthof(x) (sizeof(x)/sizeof(*x))
 
@@ -182,8 +184,17 @@ namespace MyWeb
         }
     }
 
-    void MyBrowserCtrl::ExecuteJscode(const MyString & jscode)
+    void MyBrowserCtrl::ExecuteJscode(const MyString& jscode)
     {
+        CComPtr<IHTMLWindow2> spHtmlWindow;
+        if (GetHTMLWindow(spHtmlWindow))
+        {
+            _bstr_t code = jscode.c_str();
+            _bstr_t lang = _T("javascript");
+            VARIANT ret;
+            ret.vt = VT_EMPTY;
+            spHtmlWindow->execScript(code, lang, &ret);
+        }
     }
 
     void MyBrowserCtrl::SetVisible(bool bVisible)
@@ -281,6 +292,30 @@ namespace MyWeb
         HRESULT Hr = m_pControl->m_pInPlaceObject->OnWindowMessage(uMsg, wParam, lParam, &lResult);
         if (Hr == S_OK) bHandled = bWasHandled;
         return lResult;
+    }
+
+    bool MyBrowserCtrl::GetHTMLWindow(CComPtr<IHTMLWindow2>& spHtmlWindow)
+    {
+        if (NULL != m_spWebBrowser2)
+        {
+            CComPtr<IDispatch> spDocument;
+            HRESULT hRet = m_spWebBrowser2->get_Document(&spDocument);
+            if (SUCCEEDED(hRet) && spDocument != NULL)
+            {
+                CComQIPtr<IHTMLDocument2> spHtmlDoc = spDocument;
+                if (spHtmlDoc != NULL)
+                {
+                    CComPtr<IHTMLWindow2> spParentWindow;
+                    hRet = spHtmlDoc->get_parentWindow(&spParentWindow);
+                    if (spParentWindow != NULL)
+                    {
+                        spHtmlWindow = spParentWindow;
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     int MyBrowserCtrl::CreateBrowserCtrl(HWND hBindWnd)
