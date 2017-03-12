@@ -1,5 +1,5 @@
 /******************************************************************************
-*  版权所有（C）2010-2015，xlfy.tech                      *
+*  版权所有（C）2010-2018，xlfy.tech                      *
 *  保留所有权利。                                                            *
 ******************************************************************************
 *  作者 : 熊浪
@@ -17,6 +17,7 @@
 #include "Poco/Util/Subsystem.h"
 #include "Poco/Util/LayeredConfiguration.h"
 #include "Poco/BasicEvent.h"
+#include "MyString.h"
 #include <memory>
 
 namespace Poco
@@ -31,7 +32,7 @@ namespace MyWeb {
      namespace UI {
 
         class CFrameMgr;
-        class CUIRenderMgr;
+        struct TBrowserModuleApis;
         class MYUI_API CUISubsystem :
             public    Poco::Util::Subsystem
         {
@@ -54,6 +55,16 @@ namespace MyWeb {
             Poco::BasicEvent<const uint32_t> QuitFrame;
 
             Poco::BasicEvent<WPARAM> CreateRenderParentWnd;
+
+            int CreateBrowserCtrl(HWND hBindWnd);
+            void DestroyBrowserCtrl(int nIndex);
+
+            void NavigateUrl(int nIndex, const MyString& url);
+            void ExecuteJSCode(int nIndex, const MyString& jsCode);
+
+            bool RegisterBrowserCallback(int nIndex);
+            bool UnRegisterBrowserCallback(int nIndex);
+
 
             /** Subsystem interface
             */
@@ -89,6 +100,8 @@ namespace MyWeb {
 
         private:
 
+            void _InitBrowserModuleApis();
+
             void handleTest(const std::string& name, const std::string& value);
 
         private:
@@ -98,8 +111,11 @@ namespace MyWeb {
             Poco::AutoPtr<Poco::Util::LayeredConfiguration> m_spConf;
 
             std::shared_ptr<CFrameMgr> m_spFrameMgr;
-            std::shared_ptr<CUIRenderMgr> m_spUIRenderMgr;
+            std::shared_ptr<TBrowserModuleApis> m_spBrowserModuleApis;
             std::string m_configPath;
+
+            HMODULE m_hBrowserModule;
+            
         };
 
         inline Poco::Logger& CUISubsystem::logger() const

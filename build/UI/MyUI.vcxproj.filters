@@ -22,9 +22,6 @@
     <Filter Include="Controls\Header Files">
       <UniqueIdentifier>{b984d63e-eb1c-4954-9194-86683b478df8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Controls\Source Files">
-      <UniqueIdentifier>{67d27411-1f11-401c-b4af-46fad82d9b4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dlg">
       <UniqueIdentifier>{3509341c-a3dd-4aba-8a00-ece5a972a2c1}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="Dlg\Source Files">
       <UniqueIdentifier>{12234dba-b687-4d17-911c-3cd80469eedb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls\Source Files">
+      <UniqueIdentifier>{67d27411-1f11-401c-b4af-46fad82d9b4a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +69,15 @@
     <ClInclude Include="..\..\include\DateTimeUtil.h">
       <Filter>Common\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\UI\UITestBrowser.h">
+      <Filter>Controls\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\UI\BrowserModuleApis.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MyCast.h">
+      <Filter>Common\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\include\StringHelper.cpp">
@@ -97,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="..\..\include\DateTimeUtil.cpp">
       <Filter>Common\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\UI\UITestBrowser.cpp">
+      <Filter>Controls\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

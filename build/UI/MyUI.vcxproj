@@ -101,11 +101,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\DateTimeUtil.h" />
+    <ClInclude Include="..\..\include\MyCast.h" />
     <ClInclude Include="..\..\include\StringHelper.h" />
+    <ClInclude Include="..\..\UI\BrowserModuleApis.h" />
     <ClInclude Include="..\..\UI\FrameMgr.h" />
     <ClInclude Include="..\..\UI\MainFrame.h" />
     <ClInclude Include="..\..\UI\MyUI.h" />
     <ClInclude Include="..\..\UI\resource.h" />
+    <ClInclude Include="..\..\UI\UITestBrowser.h" />
     <ClInclude Include="..\..\UI\UIDefine.h" />
     <ClInclude Include="..\..\UI\UIHelper.h" />
     <ClInclude Include="..\..\UI\stdafx.h" />
@@ -119,6 +122,7 @@
     <ClCompile Include="..\..\UI\FrameMgr.cpp" />
     <ClCompile Include="..\..\UI\MainFrame.cpp" />
     <ClCompile Include="..\..\UI\MyUI.cpp" />
+    <ClCompile Include="..\..\UI\UITestBrowser.cpp" />
     <ClCompile Include="..\..\UI\UIHelper.cpp" />
     <ClCompile Include="..\..\UI\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

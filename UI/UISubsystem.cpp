@@ -6,6 +6,8 @@
 #include "Poco/Util/PropertyFileConfiguration.h"
 #include "FrameMgr.h"
 #include "StringHelper.h"
+#include "BrowserModuleApis.h"
+#include "MyCast.h"
 
 using namespace Poco::Util;
 using Poco::Logger;
@@ -16,13 +18,66 @@ namespace MyWeb {
         CUISubsystem::CUISubsystem() :
             m_pLogger(&Logger::get(name())),
             m_spConf(new LayeredConfiguration),
-            m_spFrameMgr(new CFrameMgr(::GetCurrentThreadId()))
+            m_spFrameMgr(new CFrameMgr(::GetCurrentThreadId())),
+            m_spBrowserModuleApis(new TBrowserModuleApis),
+            m_hBrowserModule(nullptr)
         {
         }
 
         CUISubsystem::~CUISubsystem()
         {
 
+        }
+
+        int CUISubsystem::CreateBrowserCtrl(HWND hBindWnd)
+        {
+            if (m_spBrowserModuleApis->_createBrowserCtrl)
+            {
+                return m_spBrowserModuleApis->_createBrowserCtrl(hBindWnd);
+            }
+            return -1;
+        }
+
+        void CUISubsystem::DestroyBrowserCtrl(int nIndex)
+        {
+            if (m_spBrowserModuleApis->_destroyBrowserCtrl)
+            {
+                return m_spBrowserModuleApis->_destroyBrowserCtrl(nIndex);
+            }
+        }
+
+        void CUISubsystem::NavigateUrl(int nIndex, const MyString& url)
+        {
+            if (m_spBrowserModuleApis->_navigateUrl)
+            {
+                return m_spBrowserModuleApis->_navigateUrl(nIndex, url.c_str());
+            }
+        }
+
+        void CUISubsystem::ExecuteJSCode(int nIndex, const MyString& jsCode)
+        {
+            if (m_spBrowserModuleApis->_executeJSCode)
+            {
+                return m_spBrowserModuleApis->_executeJSCode(nIndex, jsCode.c_str());
+            }
+        }
+
+        bool CUISubsystem::RegisterBrowserCallback(int nIndex)
+        {
+            if (m_spBrowserModuleApis->_registerBrowserCallback)
+            {
+                return m_spBrowserModuleApis->_registerBrowserCallback(nIndex);
+            }
+            return false;
+        }
+
+        bool CUISubsystem::UnRegisterBrowserCallback(int nIndex)
+        {
+            if (m_spBrowserModuleApis->_unRegisterBrowserCallback)
+            {
+                return m_spBrowserModuleApis->_unRegisterBrowserCallback(nIndex);
+            }
+            return false;
         }
 
         const char* CUISubsystem::name() const
@@ -38,10 +93,17 @@ namespace MyWeb {
 
             CreateFrame += Poco::delegate(m_spFrameMgr.get(), &CFrameMgr::OnCreateFrame);
             QuitFrame += Poco::delegate(m_spFrameMgr.get(), &CFrameMgr::OnQuitFrame);
+
+            // load browser library;
+            m_hBrowserModule = ::LoadLibraryA((appDir + "Browser.dll").c_str());
         }
 
         void CUISubsystem::uninitialize()
         {
+            if (m_hBrowserModule)
+            {
+                ::FreeLibrary(m_hBrowserModule);
+            }
             if (!m_configPath.empty())
             {
             }
@@ -61,6 +123,50 @@ namespace MyWeb {
                 .repeatable(true)
                 .argument("path")
                 .callback(OptionCallback<CUISubsystem>(this, &CUISubsystem::handleTest)));
+        }
+
+        void CUISubsystem::_InitBrowserModuleApis()
+        {
+            if (!m_hBrowserModule)
+            {
+                return;
+            }
+
+            FARPROC pFunc = ::GetProcAddress(m_hBrowserModule, "CreateBrowserCtrl");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_createBrowserCtrl = cast_to_function<int(HWND hBindWnd)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "DestroyBrowserCtrl");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_destroyBrowserCtrl = cast_to_function<void (int)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "NavigateUrl");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_navigateUrl = cast_to_function<void(int, const TCHAR*)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "ExecuteJSCode");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_executeJSCode = cast_to_function<void (int, const TCHAR*)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "RegisterBrowserCallback");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_registerBrowserCallback = cast_to_function<bool (int)>(pFunc);
+            }
+
+            pFunc = ::GetProcAddress(m_hBrowserModule, "UnRegisterBrowserCallback");
+            if (pFunc)
+            {
+                m_spBrowserModuleApis->_unRegisterBrowserCallback = cast_to_function<bool (int)>(pFunc);
+            }
         }
 
         void CUISubsystem::handleTest(const std::string& name, const std::string& value)
