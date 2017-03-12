@@ -38,7 +38,10 @@ namespace MyWeb {
         }
 
         CMainFrame::CMainFrame(uint32_t frameID):
-            m_frameID(frameID)
+            m_frameID(frameID),
+            m_pTestBrowser(nullptr),
+            m_pUrlEdit(nullptr),
+            m_pJSCodeRichEdit(nullptr)
         {
         }
         CMainFrame::~CMainFrame()
@@ -87,6 +90,10 @@ namespace MyWeb {
                 return;
             }
 
+            if (msg.sType == DUI_MSGTYPE_RETURN)
+            {
+                OnMsgReturn(msg);
+            }
             if (msg.sType == DUI_MSGTYPE_SELECTCHANGED)
             {
                 return;
@@ -118,6 +125,26 @@ namespace MyWeb {
 
         void CMainFrame::OnCreateFrame()
         {
+        }
+
+        void CMainFrame::OnMsgReturn(DuiLib::TNotifyUI & msg)
+        {
+            if (!m_pTestBrowser)
+            {
+                return;
+            }
+
+            if (msg.pSender == m_pUrlEdit)
+            {
+                m_pTestBrowser->NavigateUrl(m_pUrlEdit->GetText().GetData());
+                return;
+            }
+
+            if (msg.pSender == m_pJSCodeRichEdit)
+            {
+                m_pTestBrowser->ExecuteJscode(m_pJSCodeRichEdit->GetText().GetData());
+                return;
+            }
         }
 
         UILIB_RESOURCETYPE CMainFrame::GetResourceType() const
@@ -161,7 +188,8 @@ namespace MyWeb {
         {
 			if (_tcscmp(pstrClass, _T("TestBrowser")) == 0)
 			{
-                return new CTestBrowserUI;
+                m_pTestBrowser = new CTestBrowserUI;
+                return m_pTestBrowser;
 			}
 
             return WindowImplBase::CreateControl(pstrClass);
@@ -169,117 +197,8 @@ namespace MyWeb {
 
         void CMainFrame::InitControls()
         {
-            m_pCurveContainer = static_cast<CVerticalLayoutUI*>(m_PaintManager.FindControl(_T("curve.container#ver")));
-            m_pRadarContainer = static_cast<CVerticalLayoutUI*>(m_PaintManager.FindControl(_T("test#ver")));
-            m_pVoiceTxt = static_cast<CTextUI*>(m_PaintManager.FindControl(_T("voice#txt")));
-            m_pVoiceLQuote = static_cast<CLabelUI*>(m_PaintManager.FindControl(_T("voice.l.quote#lbl")));
-            m_pVoiceRQuote = static_cast<CLabelUI*>(m_PaintManager.FindControl(_T("voice.r.quote#lbl")));
-            m_pEmotionAnalysisContainer = static_cast<CVerticalLayoutUI*>(m_PaintManager.FindControl(_T("emotion.analysis#ver")));
-
-            m_pVoiceLQuote->SetText(_T("“"));
-            m_pVoiceRQuote->SetText(_T("”"));
-
-            CRadarChartUI* pRaderChart = new CRadarChartUI;
-            m_pRadarContainer->Add(pRaderChart);
-			std::vector<DWORD> angleColors;
-			angleColors.emplace_back(0xf56c2e);
-			angleColors.emplace_back(0xfab84a);
-			angleColors.emplace_back(0xbbe28a);
-			angleColors.emplace_back(0x41e9f8);
-			angleColors.emplace_back(0xb45d95);
-			angleColors.emplace_back(0xf43651);
-			angleColors.emplace_back(0xf54a39);
-			pRaderChart->SetAngleColors(angleColors);
-            pRaderChart->SetTextColor(0xc6c7de);
-            pRaderChart->SetPadding({ 30, 25, 30, 25 });
-
-            std::vector<CDuiPoint> pts;
-            pts.push_back({ -15, -23 });
-            pts.push_back({ -30, -8 });
-            pts.push_back({ -30, -5 });
-            pts.push_back({ -20, 5 });
-            pts.push_back({ 8, -3 });
-            pts.push_back({ 10, -6 });
-            pts.push_back({ 10, -8 });
-            pRaderChart->SetRevisedTextPoses(pts);
-
-            std::vector<std::wstring> texts;
-            texts.emplace_back(L"气愤");
-            texts.emplace_back(L"蔑视");
-            texts.emplace_back(L"厌恶");
-            texts.emplace_back(L"恐惧");
-            texts.emplace_back(L"愉悦");
-            texts.emplace_back(L"悲伤");
-            texts.emplace_back(L"惊讶");
-            pRaderChart->SetCornerTexts(texts);
-
-            std::vector<DWORD> curveLineColors;
-            curveLineColors.emplace_back(0x7E4EED);
-            curveLineColors.emplace_back(0x6D4FEB);
-            curveLineColors.emplace_back(0x5B53EF);
-            curveLineColors.emplace_back(0x4C57EE);
-            curveLineColors.emplace_back(0x3C58EA);
-            curveLineColors.emplace_back(0x2D5FEF);
-            curveLineColors.emplace_back(0x4C57EE);
-            curveLineColors.emplace_back(0x2664F0);
-            curveLineColors.emplace_back(0x1A66E9);
-            curveLineColors.emplace_back(0x116FEC);
-            curveLineColors.emplace_back(0x1077F1);
-            curveLineColors.emplace_back(0x1085EC);
-            curveLineColors.emplace_back(0x1796E2);
-            curveLineColors.emplace_back(0x1CA7E3);
-            curveLineColors.emplace_back(0x23BDDB);
-            curveLineColors.emplace_back(0x2BC0D9);
-            curveLineColors.emplace_back(0x2BC0D9);
-
-#ifdef _DEBUG
-            OnUpdateEmotionAnalysisData(L"12:56:22 客户在聊到`企业厂房`问题时表现出失望、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"12:59:22 客户在聊到`企业厂房`问题时表现出失望、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:02:22 客户在聊到`企业厂房`问题时表现出失望、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:06:22 客户在聊到`企业厂房`问题时表现出蔑视、惊讶、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-            OnUpdateEmotionAnalysisData(L"13:26:22 客户在聊到`创业成功时`问题时表现出愉悦、难过的情绪");
-#endif
-            for (int i = 0; i < m_pCurveContainer->GetCount(); ++i)
-            {
-                CHorizontalLayoutUI* pC = static_cast<CHorizontalLayoutUI*>(m_pCurveContainer->GetItemAt(i));
-                CCurveChartUI* pCurveChart = new CCurveChartUI;
-                static_cast<CContainerUI*>(pC->GetItemAt(1))->Add(pCurveChart);
-                /*
-                auto pFirst = pC->GetItemAt(0);
-
-                pFirst->SetBorderStyle(PS_DOT);
-                pFirst->SetBottomBorderSize(1);
-                pFirst->SetBorderColor(0xdddddd);*/
-				pCurveChart->SetBorderStyle(PS_DOT);
-				pCurveChart->SetBottomBorderSize(1);
-				pCurveChart->SetBorderColor(0xdddddd);
-                pCurveChart->SetCurveLineColor(curveLineColors[i]);
-                pCurveChart->SetPadding({ 1, 2, 0, 2 });
-            }
+            m_pUrlEdit = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("url#edit")));
+            m_pJSCodeRichEdit = static_cast<CRichEditUI*>(m_PaintManager.FindControl(_T("jscode#richedit")));
         }
-
-		void CMainFrame::OnUpdateEmotionAnalysisData(const std::wstring& str)
-		{
-			CTextUI* pLbl = new CTextUI;
-
-			pLbl->SetText((std::wstring(L"<f 2>") + std::to_wstring(m_nEmotionAnalysis++) + L". " + str).c_str());
-			pLbl->SetTextColor(0xc6c7de);
-			pLbl->SetShowHtml(true);
-			pLbl->SetTextPadding({ 5, 6, 5, 7 });
-
-			m_pEmotionAnalysisContainer->AddAt(pLbl, 0);
-		}
-    } // UI
+	} // UI
 } // MyWeb

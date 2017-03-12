@@ -39,6 +39,7 @@ namespace MyWeb
         HWND GetHostWindow() const;
 
         void NavigateUrl(const MyString& url);
+        void ExecuteJscode(const MyString& jscode);
 
         bool CreateControl(const CLSID clsid);
         bool CreateControl(LPCTSTR pstrCLSID);
@@ -62,6 +63,8 @@ namespace MyWeb
         static int CreateBrowserCtrl(HWND hBindWnd);
         static void DestroyBrowserCtrl(int nIndex);
         static void SetBrowserCtrlPos(int nIndex, RECT rc);
+        static void BrowserCtrlNavigateUrl(int nIndex, const MyString& url);
+        static void BrowserCtrlExecuteJscode(int nIndex, const MyString& jscode);
 
     private:
         virtual void ReleaseControl();

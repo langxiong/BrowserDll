@@ -62,11 +62,11 @@ namespace MyWeb {
             }
         }
 
-        void CUISubsystem::ExecuteJSCode(int nIndex, const MyString& jsCode)
+        void CUISubsystem::ExecuteJscode(int nIndex, const MyString& jscode)
         {
-            if (m_spBrowserModuleApis->_executeJSCode)
+            if (m_spBrowserModuleApis->_executeJscode)
             {
-                return m_spBrowserModuleApis->_executeJSCode(nIndex, jsCode.c_str());
+                return m_spBrowserModuleApis->_executeJscode(nIndex, jscode.c_str());
             }
         }
 
@@ -165,10 +165,10 @@ namespace MyWeb {
                 m_spBrowserModuleApis->_navigateUrl = cast_to_function<void(int, const TCHAR*)>(pFunc);
             }
 
-            pFunc = ::GetProcAddress(m_hBrowserModule, "ExecuteJSCode");
+            pFunc = ::GetProcAddress(m_hBrowserModule, "ExecuteJscode");
             if (pFunc)
             {
-                m_spBrowserModuleApis->_executeJSCode = cast_to_function<void (int, const TCHAR*)>(pFunc);
+                m_spBrowserModuleApis->_executeJscode = cast_to_function<void (int, const TCHAR*)>(pFunc);
             }
 
             pFunc = ::GetProcAddress(m_hBrowserModule, "RegisterBrowserCallback");

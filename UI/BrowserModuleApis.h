@@ -16,7 +16,7 @@ namespace MyWeb
             std::function<void(int, RECT)>     _setBrowserCtrlPos;
 
             std::function<void (int, const TCHAR*)>  _navigateUrl;
-            std::function<void (int, const TCHAR*)>  _executeJSCode;
+            std::function<void (int, const TCHAR*)>  _executeJscode;
 
             std::function<bool (int)>  _registerBrowserCallback;
             std::function<bool (int)>  _unRegisterBrowserCallback;

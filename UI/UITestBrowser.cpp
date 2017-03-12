@@ -107,4 +107,12 @@ namespace DuiLib
             m_pBindWnd->ShowWindow(bVisible);
         }
     }
+    void CTestBrowserUI::NavigateUrl(const MyString & url)
+    {
+        GetUISubsystem().NavigateUrl(m_nIndex, url);
+    }
+    void CTestBrowserUI::ExecuteJscode(const MyString & jscode)
+    {
+        GetUISubsystem().ExecuteJscode(m_nIndex, jscode);
+    }
 } // DuiLib

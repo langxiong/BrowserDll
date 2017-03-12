@@ -19,6 +19,9 @@ namespace DuiLib
         virtual bool IsVisible() const;
         virtual void SetVisible(bool bVisible = true);
 
+        void NavigateUrl(const MyString& url);
+        void ExecuteJscode(const MyString& jscode);
+
     private:
         virtual void DoInit();
 

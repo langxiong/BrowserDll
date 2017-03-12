@@ -62,7 +62,7 @@ namespace MyWeb {
             void SetBrowserCtrlPos(int nIndex, RECT rc);
 
             void NavigateUrl(int nIndex, const MyString& url);
-            void ExecuteJSCode(int nIndex, const MyString& jsCode);
+            void ExecuteJscode(int nIndex, const MyString& jscode);
 
             bool RegisterBrowserCallback(int nIndex);
             bool UnRegisterBrowserCallback(int nIndex);

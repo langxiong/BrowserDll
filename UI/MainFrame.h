@@ -1,5 +1,9 @@
 #pragma once
 
+namespace DuiLib
+{
+    class CTestBrowserUI;
+}
 namespace MyWeb {
     namespace UI {
         class CMainFrame :public DuiLib::WindowImplBase
@@ -25,20 +29,16 @@ namespace MyWeb {
             void InitControls();
         private:
             void OnCreateFrame();
-            void OnUpdateEmotionAnalysisData(const std::wstring& str);
+            void OnMsgReturn(DuiLib::TNotifyUI& msg);
         private:
             uint32_t m_frameID;
-            size_t m_nEmotionAnalysis;
 
             std::vector<HANDLE> m_hWorkthreads;
             std::vector<DWORD> m_dwWorkThreadIds;
 
-			DuiLib::CVerticalLayoutUI* m_pCurveContainer;
-			DuiLib::CVerticalLayoutUI* m_pRadarContainer;
-			DuiLib::CVerticalLayoutUI* m_pEmotionAnalysisContainer;
-			DuiLib::CTextUI* m_pVoiceTxt;
-			DuiLib::CLabelUI* m_pVoiceLQuote;
-			DuiLib::CLabelUI* m_pVoiceRQuote;
+            DuiLib::CTestBrowserUI* m_pTestBrowser;
+            DuiLib::CEditUI* m_pUrlEdit;
+            DuiLib::CRichEditUI* m_pJSCodeRichEdit;
         };
     } // UI
 } // MyWeb

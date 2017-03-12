@@ -14,6 +14,8 @@ namespace MyWeb
     enum
     {
         WM_WEB_THREAD_DO_INITIALIZE = WM_USER + 0x100,
-        WM_WEB_THREAD_SET_BROWSER_POS
+        WM_WEB_THREAD_SET_BROWSER_POS,
+        WM_WEB_THREAD_NAVIGATE_URL,
+        WM_WEB_THREAD_EXECUTE_JSCODE,
     };
 }

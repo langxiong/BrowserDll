@@ -88,7 +88,7 @@ namespace MyWeb
 
             if (CreateControl(CLSID_WebBrowser))
             {
-                NavigateUrl(_T("http://www.2345.com/"));
+                NavigateUrl(_T("about:blank"));
             }
 
             return true;
@@ -100,6 +100,27 @@ namespace MyWeb
                 LPRECT pRc = reinterpret_cast<LPRECT>(msg.wParam);
                 SetPos(*pRc);
                 delete pRc;
+            }
+            return true;
+        }
+        if (msg.message == WM_WEB_THREAD_NAVIGATE_URL)
+        {
+            if (msg.wParam)
+            {
+                MyString* pStr = reinterpret_cast<MyString*>(msg.wParam);
+                NavigateUrl(*pStr);
+                delete pStr;
+            }
+            return true;
+        }
+
+        if (msg.message == WM_WEB_THREAD_EXECUTE_JSCODE)
+        {
+            if (msg.wParam)
+            {
+                MyString* pStr = reinterpret_cast<MyString*>(msg.wParam);
+                ExecuteJscode(*pStr);
+                delete pStr;
             }
             return true;
         }
@@ -159,6 +180,10 @@ namespace MyWeb
 
             m_spWebBrowser2->Navigate2(&vurl, &vempty, &vempty, &vempty, &vempty);
         }
+    }
+
+    void MyBrowserCtrl::ExecuteJscode(const MyString & jscode)
+    {
     }
 
     void MyBrowserCtrl::SetVisible(bool bVisible)
@@ -316,6 +341,38 @@ namespace MyWeb
         if (ret == 0)
         {
             delete pRc;
+        }
+    }
+
+    void MyBrowserCtrl::BrowserCtrlNavigateUrl(int nIndex, const MyString & url)
+    {
+        auto it = sm_spBrowserCtrls.find(nIndex);
+        if (it == sm_spBrowserCtrls.cend())
+        {
+            return;
+        }
+
+        MyString* pStr = new MyString(url);
+        DWORD ret = ::PostThreadMessage(it->second._dwThreadId, WM_WEB_THREAD_NAVIGATE_URL, (WPARAM)pStr, NULL);
+        if (ret == 0)
+        {
+            delete pStr;
+        }
+    }
+
+    void MyBrowserCtrl::BrowserCtrlExecuteJscode(int nIndex, const MyString & jscode)
+    {
+        auto it = sm_spBrowserCtrls.find(nIndex);
+        if (it == sm_spBrowserCtrls.cend())
+        {
+            return;
+        }
+
+        MyString* pStr = new MyString(jscode);
+        DWORD ret = ::PostThreadMessage(it->second._dwThreadId, WM_WEB_THREAD_EXECUTE_JSCODE, (WPARAM)pStr, NULL);
+        if (ret == 0)
+        {
+            delete pStr;
         }
     }
 

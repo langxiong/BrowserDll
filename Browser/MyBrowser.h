@@ -27,7 +27,7 @@ extern "C"
     void MYBROWSER_API SetBrowserCtrlPos(int nIndex, RECT rc);
 
     void MYBROWSER_API NavigateUrl(int nIndex, const TCHAR* url);
-    void MYBROWSER_API ExecuteJSCode(int nIndex, const TCHAR* jsCode);
+    void MYBROWSER_API ExecuteJscode(int nIndex, const TCHAR* jsCode);
 
     bool MYBROWSER_API RegisterBrowserCallback(int nIndex);
     bool MYBROWSER_API UnRegisterBrowserCallback(int nIndex);
