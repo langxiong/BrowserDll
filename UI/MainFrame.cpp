@@ -86,6 +86,13 @@ namespace MyWeb {
                 {
                     PostMessage(WM_USER_CREATE_FRAME);
                 }
+                else if (strName == _T("inject.jscode#btn"))
+                {
+                    if (m_pJSCodeRichEdit && m_pTestBrowser)
+                    {
+                        m_pTestBrowser->ExecuteJscode(m_pJSCodeRichEdit->GetText().GetData());
+                    }
+                }
               
                 return;
             }
@@ -137,12 +144,6 @@ namespace MyWeb {
             if (msg.pSender == m_pUrlEdit)
             {
                 m_pTestBrowser->NavigateUrl(m_pUrlEdit->GetText().GetData());
-                return;
-            }
-
-            if (msg.pSender == m_pJSCodeRichEdit)
-            {
-                m_pTestBrowser->ExecuteJscode(m_pJSCodeRichEdit->GetText().GetData());
                 return;
             }
         }
