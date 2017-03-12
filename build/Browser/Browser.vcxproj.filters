@@ -48,6 +48,18 @@
     <ClInclude Include="..\..\Browser\MyDocHostUIHandler.h">
       <Filter>Browser\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Browser\MyBrowserCtrl.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\ActiveXCtrl.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\MyWindow.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\ActiveXWnd.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Browser\dllmain.cpp">
@@ -63,6 +75,18 @@
       <Filter>Browser\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Browser\MyDocHostUIHandler.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\MyBrowserCtrl.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\ActiveXCtrl.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\MyWindow.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\ActiveXWnd.cpp">
       <Filter>Browser\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

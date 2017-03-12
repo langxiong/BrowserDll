@@ -2,9 +2,12 @@
 #include "MyString.h"
 #include <functional>
 
-struct TExternalItem
+namespace MyWeb
 {
-    MyString m_name;
+    struct TExternalItem
+    {
+        MyString m_name;
 
-    std::function<void(DISPPARAMS* params, VARIANT* result)>  m_pFnRun;
-};
+        std::function<void(DISPPARAMS* params, VARIANT* result)>  m_pFnRun;
+    };
+}

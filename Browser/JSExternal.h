@@ -10,49 +10,52 @@
 #include <vector>
 #include "BrowserDefine.h"
 
-/** JAVASCRIPT通信
-*/
-class JSExternal : 
-    public IDispatch
+namespace MyWeb
 {
-public:
-
-    /** 构造函数
+    /** JAVASCRIPT通信
     */
-    JSExternal() ;
+    class JSExternal :
+        public IDispatch
+    {
+    public:
 
-    /** 析构函数
-    */
-    virtual ~JSExternal() ;
+        /** 构造函数
+        */
+        JSExternal();
 
-public:
+        /** 析构函数
+        */
+        virtual ~JSExternal();
 
-    /** IUnknown
-    */
-    STDMETHODIMP QueryInterface(REFIID, void**) ;
-    STDMETHODIMP_(ULONG) AddRef(void) ;
-    STDMETHODIMP_(ULONG) Release(void) ;
+    public:
 
-public:
+        /** IUnknown
+        */
+        STDMETHODIMP QueryInterface(REFIID, void**);
+        STDMETHODIMP_(ULONG) AddRef(void);
+        STDMETHODIMP_(ULONG) Release(void);
 
-    /** IDispatch
-    */
-    STDMETHODIMP GetTypeInfoCount(UINT*) ;
-    STDMETHODIMP GetTypeInfo(UINT, LCID, ITypeInfo**) ;
-    STDMETHODIMP GetIDsOfNames(REFIID, LPOLESTR* names, UINT namesCount, LCID, DISPID* identify) ;
-    STDMETHODIMP Invoke(DISPID identify, REFIID, LCID, WORD flags, DISPPARAMS* params, VARIANT* result, EXCEPINFO*, UINT*) ;
+    public:
 
-public:
+        /** IDispatch
+        */
+        STDMETHODIMP GetTypeInfoCount(UINT*);
+        STDMETHODIMP GetTypeInfo(UINT, LCID, ITypeInfo**);
+        STDMETHODIMP GetIDsOfNames(REFIID, LPOLESTR* names, UINT namesCount, LCID, DISPID* identify);
+        STDMETHODIMP Invoke(DISPID identify, REFIID, LCID, WORD flags, DISPPARAMS* params, VARIANT* result, EXCEPINFO*, UINT*);
 
-    /** 返回值
-    */
-    CComBSTR m_invokeResult ; 
+    public:
 
-private:
+        /** 返回值
+        */
+        CComBSTR m_invokeResult;
 
-    std::vector<TExternalItem> m_externalItems;
+    private:
 
-    /** 引用计数
-    */
-    volatile LONG m_lRefCount ;
-};
+        std::vector<TExternalItem> m_externalItems;
+
+        /** 引用计数
+        */
+        volatile LONG m_lRefCount;
+    };
+}
