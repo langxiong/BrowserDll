@@ -200,6 +200,11 @@ namespace MyWeb {
         {
             m_pUrlEdit = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("url#edit")));
             m_pJSCodeRichEdit = static_cast<CRichEditUI*>(m_PaintManager.FindControl(_T("jscode#richedit")));
+
+            if (m_pUrlEdit)
+            {
+                m_pUrlEdit->SetFocus();
+            }
         }
 	} // UI
 } // MyWeb
