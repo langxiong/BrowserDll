@@ -29,6 +29,9 @@ extern "C"
     void MYBROWSER_API NavigateUrl(int nIndex, const TCHAR* url);
     void MYBROWSER_API ExecuteJscode(int nIndex, const TCHAR* jsCode);
 
-    bool MYBROWSER_API RegisterBrowserCallback(int nIndex);
+    bool MYBROWSER_API RegisterBrowserCallback(
+        int nIndex, 
+        const TCHAR* methodName,
+        void pFun(DISPPARAMS* params, VARIANT* result));
     bool MYBROWSER_API UnRegisterBrowserCallback(int nIndex);
 }

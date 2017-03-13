@@ -6,14 +6,15 @@
 #include <mshtmcid.h>
 #include <strsafe.h>
 #include <mshtml.h>
-#include "JSExternal.h"
+
 #pragma warning(pop)
 
 namespace MyWeb 
 {
 
-    MyDocHostUIHandler::MyDocHostUIHandler():
-        m_lRefCount(0)
+    MyDocHostUIHandler::MyDocHostUIHandler(const CComPtr<IDispatch>& spJsExternal):
+        m_lRefCount(0),
+        m_spJsExternal(spJsExternal)
     {
     }
 
@@ -62,6 +63,7 @@ namespace MyWeb
             }
         }
     }
+    
     HRESULT MyDocHostUIHandler::ShowContextMenu(/* [in] */ DWORD dwID,
                                                      /* [in] */ POINT* ppt,
                                                      /* [in] */ IUnknown* pcmdtReserved,
@@ -236,7 +238,7 @@ namespace MyWeb
     {
         if (m_spJsExternal == NULL)
         {
-            m_spJsExternal = new JSExternal;
+            return E_NOTIMPL;
         }
         return m_spJsExternal->QueryInterface(IID_IDispatch, (void **)ppDispatch) ;
     }
@@ -325,7 +327,7 @@ namespace MyWeb
 
     STDMETHODIMP_(ULONG) MyDocHostUIHandler::Release(void)
     {
-        assert(m_lRefCount);
+		assert(m_lRefCount);
         if (0 == ::InterlockedDecrement(&m_lRefCount))
         {
             delete this ;
@@ -365,10 +367,7 @@ namespace MyWeb
             ((LPUNKNOWN)*ppv)->AddRef() ;
             return S_OK ;
         }
-        else
-        {
-            assert(false);
-        }
+     
         return E_NOINTERFACE ;
     }
 }

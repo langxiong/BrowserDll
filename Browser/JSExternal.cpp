@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "JSExternal.h"
+#include "BrowserDefine.h"
 
 namespace MyWeb 
 {
@@ -11,6 +12,24 @@ namespace MyWeb
 
     JSExternal::~JSExternal()
     {
+    }
+
+    void JSExternal::AddExternalItem(const std::shared_ptr<TExternalItem>& spExternalItem)
+    {
+        m_spExternalItems.emplace_back(spExternalItem);
+    }
+
+    void JSExternal::RemoveExternalItem(const MyString & methodName)
+    {
+        auto it = std::find_if(m_spExternalItems.cbegin(), m_spExternalItems.cend(), 
+            [&methodName](const std::shared_ptr<TExternalItem>& spExternalItem) {
+            return spExternalItem->m_name == methodName;
+        });
+
+        if (it != m_spExternalItems.cend())
+        {
+            m_spExternalItems.erase(it);
+        }
     }
 
     STDMETHODIMP JSExternal::QueryInterface(REFIID riid, void** ppv)
@@ -39,7 +58,7 @@ namespace MyWeb
 
     STDMETHODIMP_(ULONG) JSExternal::AddRef(void)
     {
-        assert(m_lRefCount >= 0) ;
+		assert(m_lRefCount >= 0) ;
         return (ULONG)::InterlockedIncrement(&m_lRefCount) ;
     }
 
@@ -81,19 +100,19 @@ namespace MyWeb
                 funcName = bstrValue ;
             }
 
-
-            auto it = std::find_if(m_externalItems.cbegin(), m_externalItems.cend(), [funcName](const TExternalItem& item) {
-                return item.m_name == funcName;
+            auto it = std::find_if(m_spExternalItems.cbegin(), m_spExternalItems.cend(), 
+                [funcName](const std::shared_ptr<TExternalItem>& spItem) {
+                return spItem->m_name == funcName;
             });
 
-            if (it == m_externalItems.cend())
+            if (it == m_spExternalItems.cend())
             {
                 hresult = ResultFromScode(DISP_E_UNKNOWNNAME);
                 identify[i] = DISPID_UNKNOWN;
             }
             else
             {
-                identify[i] = (DISPID)(std::distance(m_externalItems.cbegin(), it) + 1);
+                identify[i] = (DISPID)(std::distance(m_spExternalItems.cbegin(), it) + 1);
             }
         }
         return hresult ;
@@ -106,16 +125,22 @@ namespace MyWeb
             return S_OK ;
         }
 
-        if ((identify > 0) && (identify <= (DISPID)m_externalItems.size()))
+        if ((identify > 0) && (identify <= (DISPID)m_spExternalItems.size()))
         {
-            (m_externalItems[identify - 1].m_pFnRun)(params, result) ;
+            auto spExternalItem = m_spExternalItems[identify - 1];
+            if (!spExternalItem)
+            {
+                return E_NOINTERFACE;
+            }
+            (spExternalItem->m_pFnRun)(params, result) ;
             //延后清理资源
             if ( (result != NULL) && (result->vt == VT_BSTR) )
             {
                 m_invokeResult.Empty() ;
                 m_invokeResult = result->bstrVal ;
             }        
+            return S_OK;
         }
-        return S_OK ;
+        return E_NOINTERFACE;
     }
 }

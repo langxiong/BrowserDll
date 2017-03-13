@@ -6,10 +6,11 @@
 #include <mshtmhst.h>
 #pragma warning(pop)
 
+#include <memory>
 
 namespace MyWeb
 {
-    class JSExternal;
+    struct TExternalItem;
     /** IE内核IDocHostUIHandler2接口转接
     */
     class MyDocHostUIHandler :
@@ -18,7 +19,7 @@ namespace MyWeb
     {
     public:
 
-        MyDocHostUIHandler();
+        explicit MyDocHostUIHandler(const CComPtr<IDispatch>& spJsExternal);
 
         ~MyDocHostUIHandler();
 
@@ -152,7 +153,7 @@ namespace MyWeb
 
         /** 自定义external接口
         */
-        CComPtr<JSExternal> m_spJsExternal;
+        CComPtr<IDispatch> m_spJsExternal;
 
         /** 引用计数
         */

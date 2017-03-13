@@ -115,4 +115,8 @@ namespace DuiLib
     {
         GetUISubsystem().ExecuteJscode(m_nIndex, jscode);
     }
+    void CTestBrowserUI::RegisterMethod(const MyString & methodName, void pFun(DISPPARAMS *params, VARIANT *result))
+    {
+        GetUISubsystem().RegisterBrowserCallback(m_nIndex, methodName.c_str(), pFun);
+    }
 } // DuiLib

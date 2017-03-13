@@ -9,7 +9,6 @@
 
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
 // Windows Header Files:
-#define POCO_NO_UNWINDOWS 
 #include <windows.h>
 
 #ifdef _UNICODE
@@ -22,6 +21,9 @@
 #endif
 #endif
 #pragma warning( disable : 4995 )
-#include "Poco/Foundation.h"
-#include "Poco/Util/Application.h"
+
+#include <map>
+#include <vector>
+#include <algorithm>
+
 #include "MyBrowser.h"

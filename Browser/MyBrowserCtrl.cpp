@@ -6,6 +6,7 @@
 #include "MyOleInitialize.h"
 #include "MyDocHostUIHandler.h"
 #include "MyEventDispatch.h"
+#include "JSExternal.h"
 
 #include <WindowsX.h>
 #include <comutil.h>
@@ -46,7 +47,8 @@ namespace MyWeb
         m_hInitEvent(::CreateEvent(NULL, FALSE, FALSE, NULL)),
         m_dwWebWorkThreadId(0)
     {
-        m_spDocHostUIHandler = new MyDocHostUIHandler;
+        m_spJsExternal = new JSExternal;
+        m_spDocHostUIHandler = new MyDocHostUIHandler((IDispatch*)m_spJsExternal.p);
         m_spEventDispatch = new MyEventDispatch(this, m_spDocHostUIHandler);
         m_clsid = IID_NULL;
     }
@@ -63,22 +65,21 @@ namespace MyWeb
     {
         m_dwWebWorkThreadId = ::GetCurrentThreadId();
         MyOleInitialize oleInit;
-        //�����̵߳���Ϣ����
+
         MSG msg = { 0 };
         ::PeekMessage(&msg, NULL, WM_USER, WM_USER, PM_NOREMOVE);
 
         ::PostThreadMessage(m_dwWebWorkThreadId, WM_WEB_THREAD_DO_INITIALIZE, NULL, NULL);
 
-        //�������߳���Ϣѭ��
         while (::GetMessage(&msg, 0, 0, 0) > 0)
         {
             if (!msg.hwnd && HandleCustomThreadMsg(msg))
             {
                 continue;
             }
-            ::TranslateMessage(&msg);
-            ::DispatchMessage(&msg);
-            ::Sleep(10);
+
+			::TranslateMessage(&msg);
+			::DispatchMessage(&msg);
         }
 
         ReleaseControl();
@@ -127,6 +128,27 @@ namespace MyWeb
             {
                 MyString* pStr = reinterpret_cast<MyString*>(msg.wParam);
                 ExecuteJscode(*pStr);
+                delete pStr;
+            }
+            return true;
+        }
+
+        if (msg.message == WM_WEB_THREAD_REGISTER_METHOD)
+        {
+            if (msg.wParam)
+            {
+                std::shared_ptr<TExternalItem> spExternalItem(reinterpret_cast<TExternalItem*>(msg.wParam));
+                RegisterMethod(spExternalItem);
+            }
+            return true;
+        }
+
+        if (msg.message == WM_WEB_THREAD_UNREGISTER_METHOD)
+        {
+            if (msg.wParam)
+            {
+                MyString* pStr = reinterpret_cast<MyString*>(msg.wParam);
+                UnregisterMethod(*pStr);
                 delete pStr;
             }
             return true;
@@ -200,6 +222,26 @@ namespace MyWeb
             ret.vt = VT_EMPTY;
             spHtmlWindow->execScript(code, lang, &ret);
         }
+    }
+
+    void MyBrowserCtrl::RegisterMethod(const std::shared_ptr<TExternalItem>& spExternalItem)
+    {
+        if (!m_spJsExternal)
+        {
+            return;
+        }
+
+        m_spJsExternal->AddExternalItem(spExternalItem);
+    }
+
+    void MyBrowserCtrl::UnregisterMethod(const MyString & methodName)
+    {
+        if (!m_spJsExternal)
+        {
+            return;
+        }
+
+        m_spJsExternal->RemoveExternalItem(methodName);
     }
 
     void MyBrowserCtrl::SetVisible(bool bVisible)
@@ -414,6 +456,24 @@ namespace MyWeb
         {
             delete pStr;
         }
+    }
+
+    bool MyBrowserCtrl::BrowserCtrlRegisterMethod(int nIndex, const TExternalItem & externalItem)
+    {
+        auto it = sm_spBrowserCtrls.find(nIndex);
+        if (it == sm_spBrowserCtrls.cend())
+        {
+            return false;
+        }
+
+        TExternalItem* pExternalItem = new TExternalItem(externalItem);
+        DWORD ret = ::PostThreadMessage(it->second._dwThreadId, WM_WEB_THREAD_REGISTER_METHOD, (WPARAM)pExternalItem, NULL);
+        if (ret == 0)
+        {
+            delete pExternalItem;
+            return false;
+        }
+        return true;
     }
 
     bool MyBrowserCtrl::CreateControl(LPCTSTR pstrCLSID)

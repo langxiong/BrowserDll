@@ -8,10 +8,12 @@
 #pragma warning(pop)
 
 #include <vector>
-#include "BrowserDefine.h"
+#include <memory>
 
 namespace MyWeb
 {
+    struct TExternalItem;
+
     /** JAVASCRIPT通信
     */
     class JSExternal :
@@ -27,6 +29,9 @@ namespace MyWeb
         */
         virtual ~JSExternal();
 
+        void AddExternalItem(const std::shared_ptr<TExternalItem>& spExternalItem);
+
+        void RemoveExternalItem(const MyString& methodName);
     public:
 
         /** IUnknown
@@ -52,7 +57,7 @@ namespace MyWeb
 
     private:
 
-        std::vector<TExternalItem> m_externalItems;
+        std::vector<std::shared_ptr<TExternalItem>> m_spExternalItems;
 
         /** 引用计数
         */

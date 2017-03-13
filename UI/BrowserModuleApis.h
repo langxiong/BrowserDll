@@ -18,7 +18,7 @@ namespace MyWeb
             std::function<void (int, const TCHAR*)>  _navigateUrl;
             std::function<void (int, const TCHAR*)>  _executeJscode;
 
-            std::function<bool (int)>  _registerBrowserCallback;
+            std::function<bool (int, const TCHAR*, void pFun(DISPPARAMS* params, VARIANT* result))>  _registerBrowserCallback;
             std::function<bool (int)>  _unRegisterBrowserCallback;
         };
     }

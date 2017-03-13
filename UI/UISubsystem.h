@@ -19,6 +19,7 @@
 #include "Poco/BasicEvent.h"
 #include "MyString.h"
 #include <memory>
+#include <OAIdl.h>
 
 namespace Poco
 {
@@ -64,7 +65,7 @@ namespace MyWeb {
             void NavigateUrl(int nIndex, const MyString& url);
             void ExecuteJscode(int nIndex, const MyString& jscode);
 
-            bool RegisterBrowserCallback(int nIndex);
+            bool RegisterBrowserCallback(int nIndex, const MyString& methodName, void pFun(DISPPARAMS* params, VARIANT* result));
             bool UnRegisterBrowserCallback(int nIndex);
 
 

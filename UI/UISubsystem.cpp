@@ -70,11 +70,11 @@ namespace MyWeb {
             }
         }
 
-        bool CUISubsystem::RegisterBrowserCallback(int nIndex)
+        bool CUISubsystem::RegisterBrowserCallback(int nIndex, const MyString& methodName, void pFun(DISPPARAMS* params, VARIANT* result))
         {
             if (m_spBrowserModuleApis->_registerBrowserCallback)
             {
-                return m_spBrowserModuleApis->_registerBrowserCallback(nIndex);
+                return m_spBrowserModuleApis->_registerBrowserCallback(nIndex, methodName.c_str(), pFun);
             }
             return false;
         }
@@ -174,7 +174,8 @@ namespace MyWeb {
             pFunc = ::GetProcAddress(m_hBrowserModule, "RegisterBrowserCallback");
             if (pFunc)
             {
-                m_spBrowserModuleApis->_registerBrowserCallback = cast_to_function<bool (int)>(pFunc);
+                m_spBrowserModuleApis->_registerBrowserCallback = 
+                    cast_to_function<bool (int, const TCHAR*, void pFun(DISPPARAMS* params, VARIANT* result))>(pFunc);
             }
 
             pFunc = ::GetProcAddress(m_hBrowserModule, "UnRegisterBrowserCallback");

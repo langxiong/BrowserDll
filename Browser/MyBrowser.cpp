@@ -33,9 +33,19 @@ extern "C"
         return MyBrowserCtrl::BrowserCtrlExecuteJscode(nIndex, jsCode);
     }
 
-    bool RegisterBrowserCallback(int nIndex)
+    bool RegisterBrowserCallback(
+        int nIndex,
+        const TCHAR* methodName,
+        void pFun(DISPPARAMS* params, VARIANT* result))
     {
-        return false;
+        if (!pFun)
+        {
+            return false;
+        }
+
+        return MyBrowserCtrl::BrowserCtrlRegisterMethod(
+            nIndex, 
+            { methodName, pFun });
     }
 
     bool UnRegisterBrowserCallback(int nIndex)

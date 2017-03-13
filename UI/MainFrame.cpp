@@ -196,6 +196,26 @@ namespace MyWeb {
             return WindowImplBase::CreateControl(pstrClass);
         }
 
+        void pTestFun(DISPPARAMS *params, VARIANT *result)
+        {
+            if (!params)
+            {
+                return;
+            }
+
+            for (size_t i = 0; i < params->cArgs; i++)
+            {
+                if (params->rgvarg[i].vt == VT_BSTR)
+                {
+                    ::MessageBox(NULL, params->rgvarg[0].bstrVal, NULL, MB_OK);
+                }
+            }
+            if (result)
+            {
+                result->vt = VT_EMPTY;
+            }
+        }
+
         void CMainFrame::InitControls()
         {
             m_pUrlEdit = static_cast<CEditUI*>(m_PaintManager.FindControl(_T("url#edit")));
@@ -204,6 +224,13 @@ namespace MyWeb {
             if (m_pUrlEdit)
             {
                 m_pUrlEdit->SetFocus();
+            }
+
+            if (m_pTestBrowser)
+            {
+              
+                m_pTestBrowser->RegisterMethod(
+                    _T("testhlm"), pTestFun);
             }
         }
 	} // UI

@@ -21,7 +21,10 @@ namespace DuiLib
 
         void NavigateUrl(const MyString& url);
         void ExecuteJscode(const MyString& jscode);
-
+        void RegisterMethod(
+            const MyString& methodName,
+            void pFun(DISPPARAMS* params, VARIANT* result)
+        );
     private:
         virtual void DoInit();
 

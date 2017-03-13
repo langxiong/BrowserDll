@@ -6,11 +6,14 @@
 #include <ExDisp.h>
 #include <Mshtml.h>
 #include <MsHtmHst.h>
+#include <map>
 
 #include "MyDispatchHost.h"
 
 namespace MyWeb
 {
+    struct TExternalItem;
+    class JSExternal;
     class MyBrowserCtrl : public MyDispatchHost
     {
         friend class CActiveXCtrl;
@@ -45,6 +48,9 @@ namespace MyWeb
         void NavigateUrl(const MyString& url);
         void ExecuteJscode(const MyString& jscode);
 
+        void RegisterMethod(const std::shared_ptr<TExternalItem>& spExternalItem);
+        void UnregisterMethod(const MyString& methodName);
+
         bool CreateControl(const CLSID clsid);
         bool CreateControl(LPCTSTR pstrCLSID);
 
@@ -78,7 +84,7 @@ namespace MyWeb
         static void SetBrowserCtrlPos(int nIndex, RECT rc);
         static void BrowserCtrlNavigateUrl(int nIndex, const MyString& url);
         static void BrowserCtrlExecuteJscode(int nIndex, const MyString& jscode);
-
+        static bool BrowserCtrlRegisterMethod(int nIndex, const TExternalItem& externalItem);
     private:
         virtual void ReleaseControl();
         virtual bool DoCreateControl();
@@ -97,6 +103,7 @@ namespace MyWeb
         CComPtr<IWebBrowser2> m_spWebBrowser2;
         CComPtr<IDispatch> m_spEventDispatch;
         CComPtr<IDocHostUIHandler> m_spDocHostUIHandler;
+        CComPtr<JSExternal> m_spJsExternal;
 
         HWND m_hBindWnd;
         HWND m_hHostWnd;
