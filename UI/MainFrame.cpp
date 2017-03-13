@@ -207,7 +207,7 @@ namespace MyWeb {
             {
                 if (params->rgvarg[i].vt == VT_BSTR)
                 {
-                    ::MessageBox(NULL, params->rgvarg[0].bstrVal, NULL, MB_OK);
+                    ::MessageBox(NULL, params->rgvarg[0].bstrVal, _T("js call c++"), MB_OK);
                 }
             }
             if (result)
@@ -230,7 +230,7 @@ namespace MyWeb {
             {
               
                 m_pTestBrowser->RegisterMethod(
-                    _T("testhlm"), pTestFun);
+                    _T("MyCallMsgBoxByXL"), pTestFun);
             }
         }
 	} // UI
