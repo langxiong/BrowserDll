@@ -112,7 +112,5 @@ namespace MyWeb
         bool m_bInPlaceActive;
         bool m_bWindowless;
     };
-
-
 }
 

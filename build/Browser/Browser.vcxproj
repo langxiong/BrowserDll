@@ -102,7 +102,9 @@
     <ClInclude Include="..\..\Browser\MyBrowser.h" />
     <ClInclude Include="..\..\Browser\JSExternal.h" />
     <ClInclude Include="..\..\Browser\MyBrowserCtrl.h" />
+    <ClInclude Include="..\..\Browser\MyDispatchHost.h" />
     <ClInclude Include="..\..\Browser\MyDocHostUIHandler.h" />
+    <ClInclude Include="..\..\Browser\MyEventDispatch.h" />
     <ClInclude Include="..\..\Browser\MyOleInitialize.h" />
     <ClInclude Include="..\..\Browser\MyWindow.h" />
     <ClInclude Include="..\..\Browser\resource.h" />
@@ -116,7 +118,9 @@
     <ClCompile Include="..\..\Browser\MyBrowser.cpp" />
     <ClCompile Include="..\..\Browser\JSExternal.cpp" />
     <ClCompile Include="..\..\Browser\MyBrowserCtrl.cpp" />
+    <ClCompile Include="..\..\Browser\MyDispatchHost.cpp" />
     <ClCompile Include="..\..\Browser\MyDocHostUIHandler.cpp" />
+    <ClCompile Include="..\..\Browser\MyEventDispatch.cpp" />
     <ClCompile Include="..\..\Browser\MyOleInitialize.cpp" />
     <ClCompile Include="..\..\Browser\MyWindow.cpp" />
     <ClCompile Include="..\..\Browser\stdafx.cpp">

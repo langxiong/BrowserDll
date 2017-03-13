@@ -5,10 +5,13 @@
 #include <thread>
 #include <ExDisp.h>
 #include <Mshtml.h>
+#include <MsHtmHst.h>
+
+#include "MyDispatchHost.h"
 
 namespace MyWeb
 {
-    class MyBrowserCtrl
+    class MyBrowserCtrl : public MyDispatchHost
     {
         friend class CActiveXCtrl;
 
@@ -45,11 +48,16 @@ namespace MyWeb
         bool CreateControl(const CLSID clsid);
         bool CreateControl(LPCTSTR pstrCLSID);
 
+        HRESULT RegisterEventHandler(BOOL inAdvise);
+
         virtual HRESULT GetExternalCall(LPVOID* ppRet);
 
         virtual STDMETHODIMP QueryInterface(REFIID iid, void ** ppvObject);
         /*virtual HRESULT Download(IMoniker *pmk,IBindCtx *pbc,DWORD dwBindVerb,LONG grfBINDF,BINDINFO *pBindInfo,
         LPCOLESTR pszHeaders,LPCOLESTR pszRedir,UINT uiCP);*/
+
+        void NavigateComplete2(IDispatch * pDisp, VARIANT * pvURL);
+
         CLSID GetClisd() const;
       
         void SetVisible(bool bVisible = true);
@@ -81,9 +89,15 @@ namespace MyWeb
 
         CLSID m_clsid;
         RECT m_rcItem;
+
+        DWORD m_dwCookie;
+
         IOleObject* m_pUnk;
         CActiveXCtrl* m_pControl;
         CComPtr<IWebBrowser2> m_spWebBrowser2;
+        CComPtr<IDispatch> m_spEventDispatch;
+        CComPtr<IDocHostUIHandler> m_spDocHostUIHandler;
+
         HWND m_hBindWnd;
         HWND m_hHostWnd;
         bool m_bCreated;

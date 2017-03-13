@@ -63,6 +63,12 @@
     <ClInclude Include="..\..\Browser\MyOleInitialize.h">
       <Filter>Browser\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Browser\MyEventDispatch.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Browser\MyDispatchHost.h">
+      <Filter>Browser\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Browser\dllmain.cpp">
@@ -93,6 +99,12 @@
       <Filter>Browser\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Browser\MyOleInitialize.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\MyEventDispatch.cpp">
+      <Filter>Browser\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Browser\MyDispatchHost.cpp">
       <Filter>Browser\Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,8 +2,10 @@
 #include "MyBrowserCtrl.h"
 #include "ActiveXCtrl.h"
 #include "ActiveXWnd.h"
-#include "MyOleInitialize.h"
 #include "BrowserDefine.h"
+#include "MyOleInitialize.h"
+#include "MyDocHostUIHandler.h"
+#include "MyEventDispatch.h"
 
 #include <WindowsX.h>
 #include <comutil.h>
@@ -35,6 +37,7 @@ namespace MyWeb
     std::map<int, MyBrowserCtrl::TData> MyBrowserCtrl::sm_spBrowserCtrls;
 
     MyBrowserCtrl::MyBrowserCtrl(HWND hBindWnd) : 
+        m_dwCookie(0),
         m_pUnk(NULL), 
         m_pControl(NULL), 
         m_hBindWnd(hBindWnd),
@@ -43,6 +46,8 @@ namespace MyWeb
         m_hInitEvent(::CreateEvent(NULL, FALSE, FALSE, NULL)),
         m_dwWebWorkThreadId(0)
     {
+        m_spDocHostUIHandler = new MyDocHostUIHandler;
+        m_spEventDispatch = new MyEventDispatch(this, m_spDocHostUIHandler);
         m_clsid = IID_NULL;
     }
 
@@ -425,6 +430,35 @@ namespace MyWeb
         return CreateControl(clsid);
     }
 
+    HRESULT MyBrowserCtrl::RegisterEventHandler(BOOL inAdvise)
+    {
+        if (!m_spWebBrowser2 || !m_spEventDispatch)
+        {
+            return E_NOINTERFACE;
+        }
+        CComPtr<IConnectionPointContainer>  pCPC;
+        HRESULT hr = m_spWebBrowser2->QueryInterface(IID_IConnectionPointContainer, (void **)&pCPC);
+        if (FAILED(hr))
+        {
+            return hr;
+        }
+
+        CComPtr<IConnectionPoint> pCP;
+        hr = pCPC->FindConnectionPoint(DIID_DWebBrowserEvents2, &pCP);
+        if (FAILED(hr))
+            return hr;
+
+        if (inAdvise)
+        {
+            hr = pCP->Advise(m_spEventDispatch, &m_dwCookie);
+        }
+        else
+        {
+            hr = pCP->Unadvise(m_dwCookie);
+        }
+        return hr;
+    }
+
     bool MyBrowserCtrl::CreateControl(const CLSID clsid)
     {
         assert(clsid != IID_NULL);
@@ -437,6 +471,7 @@ namespace MyWeb
 
     void MyBrowserCtrl::ReleaseControl()
     {
+        RegisterEventHandler(FALSE);
         m_hHostWnd = NULL;
         if (m_pUnk != NULL) {
             IObjectWithSite* pSite = NULL;
@@ -512,8 +547,13 @@ namespace MyWeb
                 spSite->SetSite(static_cast<IOleClientSite*>(m_pControl));
             }
         }
+
         hr = m_pUnk->QueryInterface(IID_IWebBrowser2, (LPVOID*)&m_spWebBrowser2);
-        
+        if (FAILED(hr))
+        {
+            return false;
+        }
+        hr = RegisterEventHandler(TRUE);
         return SUCCEEDED(hr);
     }
 
@@ -531,6 +571,38 @@ namespace MyWeb
         if (m_pUnk == NULL) return E_PENDING;
         return m_pUnk->QueryInterface(iid, (LPVOID*)ppvObject);
     }
+
+    void MyBrowserCtrl::NavigateComplete2(IDispatch * pDisp, VARIANT * pvURL)
+    {
+        if (m_spDocHostUIHandler != NULL)
+        {
+            CComPtr<IDispatch> spDisp;
+            HRESULT hr = S_FALSE;
+            if (m_spWebBrowser2 != NULL)
+            {
+                hr = m_spWebBrowser2->get_Document(&spDisp);
+            }
+            if ((hr == S_OK) && (spDisp != NULL))
+            {
+                CComQIPtr<ICustomDoc, &IID_ICustomDoc> spCustomDoc(spDisp);
+                if (spCustomDoc != NULL)
+                {
+                    CComQIPtr<IDocHostUIHandler> spDocHostUIHandler = m_spDocHostUIHandler;
+                    assert(spDocHostUIHandler != NULL);
+                    if (spDocHostUIHandler != NULL)
+                    {
+                        hr = spCustomDoc->SetUIHandler(spDocHostUIHandler);
+                        assert(hr == S_OK);
+                    }
+                }
+                else
+                {
+                    assert(false);
+                }
+            }
+        }
+    }
+
 
     CLSID MyBrowserCtrl::GetClisd() const
     {

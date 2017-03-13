@@ -320,7 +320,6 @@ namespace MyWeb
 
     STDMETHODIMP_(ULONG) MyDocHostUIHandler::AddRef(void)
     {
-        assert(m_lRefCount);
         return (ULONG)::InterlockedIncrement(&m_lRefCount);
     }
 
@@ -344,7 +343,7 @@ namespace MyWeb
 
         if (IID_IUnknown == riid)
         {
-            *ppv = (IUnknown*)(IOleCommandTarget*)this ;
+            *ppv = (LPUNKNOWN*)this;
             ((LPUNKNOWN)*ppv)->AddRef() ;
             return S_OK ;
         }
