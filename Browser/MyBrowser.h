@@ -21,6 +21,11 @@
 
 extern "C"
 {
+    /* 新建一个webbrowser控件. 均在一个单独的线程中运行
+    @param hBindWnd webbrowser控件需要绑定的父窗口
+    @return 创建成功返回一个(>=0)的index, -1为创建失败. 
+            后续调用接口，均需要传入该index，做为接口的第一个参数
+    */
     int MYBROWSER_API CreateBrowserCtrl(HWND hBindWnd);
     void MYBROWSER_API DestroyBrowserCtrl(int nIndex);
 
