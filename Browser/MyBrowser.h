@@ -58,11 +58,43 @@ extern "C"
     @param nIndex 创建webbrowser返回的index
     @param methodName 方法名称
     @pFun  回调函数，(params是js回调时的入参， result用于设定js回调的返回值
-    例:
+    例: 
+    	```cpp
+    	void pTestFun(DISPPARAMS *params, VARIANT *result)
+        {
+            if (!params)
+            {
+                return;
+            }
+
+            for (size_t i = 0; i < params->cArgs; i++)
+            {
+                if (params->rgvarg[i].vt == VT_BSTR)
+                {
+                    ::MessageBox(NULL, params->rgvarg[0].bstrVal, _T("js call c++"), MB_OK);
+                }
+            }
+            if (result)
+            {
+                result->vt = VT_EMPTY;
+            }
+        }
+        
+        
+        RegisterBrowserCallback(0, _T("MyCallMsgBoxByXL"), pTestFun)
+        ```
+        
+        ```js
+        
+        window.external.MyCallMsgBoxByXL('Hello from js')
+        ```
     */
     bool MYBROWSER_API RegisterBrowserCallback(
         int nIndex, 
         const TCHAR* methodName,
         void pFun(DISPPARAMS* params, VARIANT* result));
+  
+  	/* 没有实现
+    */
     bool MYBROWSER_API UnRegisterBrowserCallback(int nIndex);
 }
