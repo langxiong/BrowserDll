@@ -29,6 +29,7 @@
 ## 代码实现的亮点.
 * cast_to_function:
 > 在做导入dll的函数时，抽离一个方便个人开发的泛型辅助函数，将::GetProcAddress返回的函数转换为std::fucntion
+
 ```cpp
 template<typename Signature>
 std::function<Signature> cast_to_function(FARPROC f)
@@ -37,6 +38,7 @@ std::function<Signature> cast_to_function(FARPROC f)
 }
 ```
 > sample
+
 ```cpp
 FARPROC pFunc = ::GetProcAddress(m_hBrowserModule, "CreateBrowserCtrl");
 if (pFunc)
