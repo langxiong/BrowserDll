@@ -38,7 +38,7 @@ extern "C"
         const TCHAR* methodName,
         void pFun(DISPPARAMS* params, VARIANT* result))
     {
-        if (!pFun)
+        if (!pFun || !methodName)
         {
             return false;
         }
