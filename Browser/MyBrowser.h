@@ -94,7 +94,7 @@ extern "C"
         const TCHAR* methodName,
         void pFun(DISPPARAMS* params, VARIANT* result));
   
-  	/* 没有实现
+ 	/* 没有实现
     */
     bool MYBROWSER_API UnRegisterBrowserCallback(int nIndex);
 }
