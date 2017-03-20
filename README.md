@@ -1,5 +1,7 @@
 # WebBrowser
 
+![Demo.gif](https://github.com/langxiong/BrowserDll/blob/master/screen.gif)
+
 ## 设计思路
 1. 每个新的webbrowser控件均在单独的一个线程中运行，
 api通过::PostThreadMessage与该线程交互。
